@@ -1,0 +1,20 @@
+{
+  "short_name": "Black cat app",
+  "name": "Black cat app",
+  "description": "Black cat app",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "size": "192x192"
+    },{
+      "src": "/icon-512",
+      "type": "image/png",
+      "size": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#23272A",
+  "display": "standalone",
+  "theme_color": "#0DCAF0"
+}
