@@ -13,9 +13,9 @@
     gtag('config', 'UA-178450608-1');
   </script>
   <meta charset="UTF-8">
-  <title>Black cat | 播放狀態</title>
+  <title>Black cat | 機器人設定</title>
   <meta name="og:url" property="og:url" content="https://blackcatbot.tk/app">
-  <meta name="og:title" property="og:title" content="Black cat | 網頁面板">
+  <meta name="og:title" property="og:title" content="Black cat | 機器人設定">
   <meta name="og:description" property="og:description" content="Black cat機器人面板">
   <meta name="og:type" property="og:type" content="website">
   <meta name="og:image" property="og:image" content="https://blackcatbot.tk/banner.jpg">
@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap">
   <link rel="stylesheet" href="styles.css">
   <link rel="canonical" href="https://app.blackcatbot.tk/">
-  <link rel="icon" href="favicon.png">
+  <link rel="icon" href="./favicon.png">
 </head>
 
 <body class="bg-dark">
@@ -37,7 +37,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-info">
       <div class="container-fluid">
         <a class="navbar-brand" href="https://blackcatbot.tk">
-          <img src="boticon.png" alt="Black cat logo" width="60px" height="60px"
+          <img src="./boticon.png" alt="Black cat logo" width="60px" height="60px"
             class="d-inline align-top img-thumbnail" style="border-radius: 50%">
         </a>
         <div class="d-flex justify-content-end align-items-center rounded" id="user-container">
@@ -46,79 +46,6 @@
         </div>
       </div>
     </nav>
-  </div>
-  <div class="modal fade" id="invalidDialog" tabindex="-1" aria-labelledby="invalidDialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="invalidDialogTitle">ID無效</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          請輸入有效的伺服器ID
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">確定</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="errorDialog" tabindex="-1" aria-labelledby="errorDialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="errorDialogTitle">連線到Black cat發生錯誤!</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          在連線到Black cat時發生錯誤，請截圖回報給<code>Wolf yuan#1135</code>
-          <br>
-          錯誤內容或代碼:
-          <code id="errorInfo"></code>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" id="reload">重新載入</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="lyricsDialog" tabindex="-1" aria-labelledby="lyricsDialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="lyricsDialogTitle">歌詞</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <h1 class="text-center" id="lyricsLoading">正在取得歌詞...</h1>
-          <div class="progress rounded-pill" id="lyricsProgress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated rounded-pill" role="progressbar"
-              aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-          </div>
-          <p id="lyricsText"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">關閉</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="invalidSongTitle" tabindex="-1" aria-labelledby="invalidSongTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="invalidDialogTitle">ID無效</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          請輸入有效的歌曲名稱
-          名稱至少要三個字!
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">確定</button>
-        </div>
-      </div>
-    </div>
   </div>
   <div class="modal fade" id="loginDialog" tabindex="-1" aria-labelledby="loginDialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -132,7 +59,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-          <button type="button" class="btn btn-primary" id="login"><img src="discord.svg" width="20px" height="20px">
+          <button type="button" class="btn btn-primary" id="login"><img src="./discord.svg" width="20px" height="20px">
             使用Discord登入</button>
         </div>
       </div>
@@ -165,48 +92,72 @@
     </div>
   </div>
   <br>
-  <h3 class="text-center text-light" id="srv">Black cat</h3>
-  <div class="out">
-    <div class="container" id="container">
-      <br>
-      <img src="banner.jpg" class="rounded" id="thumbnail" width="240px" height="140px">
-      <center>
-        <div class="loader" id="loader"></div>
-      </center>
-      <a href="#" id="link" class="link">
-        <p class="fs-4" id="songtitle">正在取得歌曲資訊...</p>
-      </a>
-      <center>
-        <input type="text" class="form-control bg-dark text-light rounded-pill" id="serverid" placeholder="12345678"
-          style="text-align:center;" aria-describedby="serverid">
-      </center>
-      <br>
-      <button type="button" id="query" class="btn btn-outline-light rounded-pill">查詢!</button>
-      <p id="timeT" class="fs-9"></p>
-      <div class="progress bg-dark rounded-pill" id="time">
-        <div class="progress-bar bg-info" id="timeP" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-      </div>
-      <br>
-      <div class="container" id="controlPanel">
-        <div class="row justify-content-md-center">
-          <div class="col col-lg-2">
-            <button class="btn" id="lyricsButton"><i class="bi bi-chat-right-text-fill fs-5 text-info"></i></button>
-          </div>
-          <div class="col col-lg-2">
-            <button class="btn" id="controlPlay"><i class="bi bi-play-fill fs-5 text-info"></i></button>
-            <button class="btn" id="controlPause"><i class="bi bi-pause-fill fs-5 text-info"></i></button>
-          </div>
-          <div class="col col-lg-2">
-            <button class="btn" id="controlSkip"><i class="bi bi-skip-forward-fill fs-5 text-info"></i></button>
-          </div>
-        </div>
-      </div>
-      <br>
-    </div>
+  <div class="container srv rounded">
+    <div class="fs-3 loading">正在取得你的伺服器...</div>
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
+    <img src="./boticon.png" width="65px" height="65px" class="rounded-circle" alt="Black cat">
   </div>
-  <br>
   <script src="./js/bootstrap.bundle.min.js"></script>
   <script src="script.js"></script>
 </body>
-
 </html>
