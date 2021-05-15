@@ -47,7 +47,7 @@ function toast(red, info) {
 }
 window.onload = function () {
   if (getCookie("server")) {
-    window.location = `https://app.blackcatbot.tk/?server=${getCookie("server")}`;
+    window.location = `https://app.blackcatbot.tk/music/?server=${getCookie("server")}`;
     deleteCookie("server");
   }
 };
@@ -59,7 +59,7 @@ document.getElementById("query").onclick = function () {
     dialog.show();
   }
   else {
-    window.location.href = "https://app.blackcatbot.tk/?server=" + document.getElementById("serverid").value;
+    window.location.href = "https://app.blackcatbot.tk/music/?server=" + document.getElementById("serverid").value;
   }
 };
 document.getElementById("reload").onclick = function () {
