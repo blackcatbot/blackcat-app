@@ -20,14 +20,14 @@ function getCookie(cname) {
     }
   }
   return "";
-};
+}
 /**
  * Delete a cookie
  * @param {String} name Cookie name
  */
 function deleteCookie(name) {
   document.cookie = name + '=; Max-Age=-99999999;';
-};
+}
 /**
  * Toast message
  * @param {Boolean} red Toast message as red?
@@ -50,9 +50,7 @@ window.onload = function () {
     window.location = `https://app.blackcatbot.tk/?server=${getCookie("server")}`;
     deleteCookie("server");
   }
-};
-
-
+}
 
 if (getCookie("token")) {
   document.getElementById("user-username").innerHTML = "正在登入...";
@@ -69,12 +67,12 @@ document.getElementById("user-container").onclick = function () {
     let dialog = new bootstrap.Modal(document.getElementById('loginDialog'));
     dialog.show();
   }
-};
+}
 document.getElementById("login").onclick = function () {
   if (urlParams.has("server")) document.cookie = `server=${urlParams.get("server")}`;
-  document.location.href = "https://discord.com/api/oauth2/authorize?client_id=718469951958286397&redirect_uri=https%3A%2F%2Fapi.blackcatbot.tk%2Fapi%2Fauth%2Flogin&response_type=code&scope=identify%20guilds";
-};
+  document.location.href = "https://discord.com/api/oauth2/authorize?client_id=848006097197334568&redirect_uri=https%3A%2F%2Fapi.blackcatbot.tk%2Fapi%2Fauth%2Flogin&response_type=code&scope=guilds%20identify";
+}
 document.getElementById("logout").onclick = function () {
   deleteCookie("token");
   window.location.reload();
-};
+}

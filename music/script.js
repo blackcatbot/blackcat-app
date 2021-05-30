@@ -240,7 +240,7 @@ document.getElementById("user-container").onclick = function () {
 };
 document.getElementById("login").onclick = function () {
   if (urlParams.has("server")) document.cookie = `server=${urlParams.get("server")}`;
-  document.location.href = "https://discord.com/api/oauth2/authorize?client_id=718469951958286397&redirect_uri=https%3A%2F%2Fapi.blackcatbot.tk%2Fapi%2Fauth%2Flogin&response_type=code&scope=identify%20guilds";
+  document.location.href = "https://discord.com/api/oauth2/authorize?client_id=848006097197334568&redirect_uri=https%3A%2F%2Fapi.blackcatbot.tk%2Fapi%2Fauth%2Flogin&response_type=code&scope=guilds%20identify";
 };
 document.getElementById("logout").onclick = function () {
   deleteCookie("token");
