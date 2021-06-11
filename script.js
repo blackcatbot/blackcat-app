@@ -1,6 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 let current;
 let errCount = 0;
+
 /**
  * Get a cookie value
  * @param {String} cname Cookie name

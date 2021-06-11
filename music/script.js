@@ -131,7 +131,23 @@ if (urlParams.has("server")) {
         dialog.show();
       }
       ws.onopen = function () {
-        ws.send(JSON.stringify({ "server": urlParams.get("server") }));
+        try {
+          setInterval(function () {
+            ws.send(JSON.stringify({"server": urlParams.get("server")}));
+          }, 1000);
+        } catch(e) {
+          document.getElementById("songtitle").innerHTML = "無法連線 :(";
+          document.getElementById("loader").style.display = "none";
+          document.getElementById("thumbnail").style.display = "none";
+          document.getElementById("time").style.display = "none";
+          document.getElementById("timeT").style.display = "none";
+          document.getElementById("controlPanel").style.display = "none";
+          document.getElementById("container").style.backgroundColor = "rgba(0,0,0,0)";
+          document.getElementById("songtitle").style.color = "#ffffff";
+          document.getElementById("link").href = "#";
+          document.getElementById("srv").innerHTML = "Black cat";
+          document.title = "Black cat | 播放狀態";
+        }
       }
       ws.onmessage = function (event) {
         let json;

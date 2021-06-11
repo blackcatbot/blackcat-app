@@ -85,7 +85,6 @@ a:active {
   -ms-user-select: none;
   user-select: none;
   background-color: transparent;
-  cursor: pointer;
   transition: 0.5s;
 }
 
