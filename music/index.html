@@ -22,7 +22,6 @@
   <meta name="description" content="Black cat機器人面板">
   <meta name="theme-color" content="#0DCAF0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="manifest" href="../manifest.json">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../icon/bootstrap-icons.css">
@@ -115,7 +114,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-          <button type="button" class="btn btn-primary" id="login"><img src="../discord.svg" width="20px" height="20px">
+          <button type="button" class="btn btn-primary" id="login"><img src="../discord.svg" width="20px" height="20px" alt="Discord">
             使用Discord登入</button>
         </div>
       </div>
@@ -172,15 +171,21 @@
       <br>
       <div class="container" id="controlPanel">
         <div class="row justify-content-md-center">
-          <div class="col col-lg-2">
+          <div class="col col-lg-1">
             <button class="btn" id="lyricsButton"><i class="bi bi-chat-right-text-fill fs-5 text-info"></i></button>
           </div>
-          <div class="col col-lg-2">
+          <div class="col col-lg-1">
             <button class="btn" id="controlPlay"><i class="bi bi-play-fill fs-5 text-info"></i></button>
             <button class="btn" id="controlPause"><i class="bi bi-pause-fill fs-5 text-info"></i></button>
           </div>
-          <div class="col col-lg-2">
+          <div class="col col-lg-1">
             <button class="btn" id="controlSkip"><i class="bi bi-skip-forward-fill fs-5 text-info"></i></button>
+          </div>
+          <div class="col col-lg-1">
+            <button class="btn" id="controlVolume"><i class="bi bi-volume-up-fill fs-5 text-info"></i></button>
+          </div>
+          <div class="col col-lg-1">
+            <button class="btn" id="controlAdd"><i class="bi bi-file-earmark-plus-fill fs-5 text-info"></i></button>
           </div>
         </div>
       </div>

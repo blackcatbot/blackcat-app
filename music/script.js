@@ -1,6 +1,5 @@
 const urlParams = new URLSearchParams(window.location.search);
-let current;
-let errCount = 0;
+let current, errCount = 0, userid = null;
 /**
  * Get a cookie value
  * @param {String} cname Cookie name
@@ -131,8 +130,9 @@ if (urlParams.has("server")) {
         dialog.show();
       }
       ws.onopen = function () {
+        let interval;
         try {
-          setInterval(function () {
+          interval = setInterval(function () {
             ws.send(JSON.stringify({"server": urlParams.get("server")}));
           }, 1000);
         } catch(e) {
@@ -147,6 +147,7 @@ if (urlParams.has("server")) {
           document.getElementById("link").href = "#";
           document.getElementById("srv").innerHTML = "Black cat";
           document.title = "Black cat | 播放狀態";
+          clearInterval(interval);
         }
       }
       ws.onmessage = function (event) {
@@ -243,6 +244,7 @@ if (getCookie("token")) {
   fetch('https://api.blackcatbot.tk/api/auth/info?token=' + getCookie("token"), { mode: "cors", "Access-Control-Allow-Origin": "*" }).then(res => res.json()).then(userJson => {
     document.getElementById("user-avatar").src = `https://cdn.discordapp.com/avatars/${userJson.id}/${userJson.avatar}`;
     document.getElementById("user-username").innerHTML = userJson.username;
+    userid = userJson.id;
   });
 }
 document.getElementById("user-container").onclick = function () {
