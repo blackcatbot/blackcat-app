@@ -1,5 +1,6 @@
 const urlParams = new URLSearchParams(window.location.search);
-let current, errCount = 0, userid = null;
+let current, errCount = 0,
+  userid = null;
 /**
  * Get a cookie value
  * @param {String} cname Cookie name
@@ -56,8 +57,7 @@ document.getElementById("query").onclick = function () {
   if (document.getElementById("serverid").value.length !== 18 || isNaN(document.getElementById("serverid").value)) {
     let dialog = new bootstrap.Modal(document.getElementById('invalidDialog'));
     dialog.show();
-  }
-  else {
+  } else {
     window.location.href = "https://app.blackcatbot.tk/music/?server=" + document.getElementById("serverid").value;
   }
 };
@@ -74,17 +74,13 @@ document.title = "Black cat | 播放狀態";
 document.getElementById("lyricsButton").onclick = function () {
   let dialog = new bootstrap.Modal(document.getElementById('lyricsDialog'));
   dialog.show();
-  fetch("https://api.blackcatbot.tk/api/lyrics?title=" + current.title, { mode: "cors", "Access-Control-Allow-Origin": "*" }).then(respone => respone.json()).then(json => {
+  fetch("https://api.blackcatbot.tk/api/lyrics?title=" + current.title, {
+    mode: "cors",
+    "Access-Control-Allow-Origin": "*"
+  }).then(respone => respone.json()).then(json => {
     if (json.error) {
-      if (json.code === 201) {
-        document.getElementById("lyricsLoading").innerHTML = "沒有找到歌詞...";
-        document.getElementById("lyricsProgress").style.display = "none";
-      } else {
-        document.getElementById("errorInfo").innerHTML = json.code;
-        const errorDialog = new bootstrap.Modal(document.getElementById('errorDialog'), { keyboard: false });
-        errorDialog.show();
-        dialog.hide();
-      }
+      document.getElementById("lyricsLoading").innerHTML = "沒有找到歌詞...";
+      document.getElementById("lyricsProgress").style.display = "none";
     } else {
       document.getElementById("lyricsText").innerHTML = json.lyrics.replaceAll("\n", "<br>");
       document.getElementById("lyricsLoading").innerHTML = `${current.title}的歌詞`;
@@ -94,7 +90,9 @@ document.getElementById("lyricsButton").onclick = function () {
     errCount += 1;
     if (errCount >= 3) {
       document.getElementById("errorInfo").innerHTML = error;
-      let dialog = new bootstrap.Modal(document.getElementById('errorDialog'), { keyboard: false });
+      let dialog = new bootstrap.Modal(document.getElementById('errorDialog'), {
+        keyboard: false
+      });
       dialog.show();
       clearInterval(sendInterval);
     }
@@ -106,11 +104,16 @@ document.getElementById("lyricsDialog").addEventListener("hidden.bs.modal", () =
   document.getElementById("lyricsText").innerHTML = "";
 });
 if (urlParams.has("server")) {
-  fetch("https://api.blackcatbot.tk/api/exist?server=" + urlParams.get("server"), { mode: "cors", "Access-Control-Allow-Origin": "*" }).then(respone => respone.json()).then(json => {
+  fetch("https://api.blackcatbot.tk/api/exist?server=" + urlParams.get("server"), {
+    mode: "cors",
+    "Access-Control-Allow-Origin": "*"
+  }).then(respone => respone.json()).then(json => {
     current = json;
     if (json.error) {
       document.getElementById("errorInfo").innerHTML = json.code;
-      let dialog = new bootstrap.Modal(document.getElementById('errorDialog'), { keyboard: false });
+      let dialog = new bootstrap.Modal(document.getElementById('errorDialog'), {
+        keyboard: false
+      });
       dialog.show();
       clearInterval(sendInterval);
     } else if (!json.exist) {
@@ -120,8 +123,7 @@ if (urlParams.has("server")) {
       document.getElementById("lyricsButton").style.display = "none";
       let dialog = new bootstrap.Modal(document.getElementById('invalidDialog'));
       dialog.show();
-    }
-    else {
+    } else {
       document.getElementById("loader").style.display = "none";
       let ws = new WebSocket("wss://api.blackcatbot.tk/api/ws/playing");
       ws.onerror = function () {
@@ -133,9 +135,11 @@ if (urlParams.has("server")) {
         let interval;
         try {
           interval = setInterval(function () {
-            ws.send(JSON.stringify({"server": urlParams.get("server")}));
+            ws.send(JSON.stringify({
+              "server": urlParams.get("server")
+            }));
           }, 1000);
-        } catch(e) {
+        } catch (e) {
           document.getElementById("songtitle").innerHTML = "無法連線 :(";
           document.getElementById("loader").style.display = "none";
           document.getElementById("thumbnail").style.display = "none";
@@ -156,7 +160,9 @@ if (urlParams.has("server")) {
         current = json;
         if (json.error) {
           document.getElementById("errorInfo").innerHTML = json.code;
-          let dialog = new bootstrap.Modal(document.getElementById('errorDialog'), { keyboard: false });
+          let dialog = new bootstrap.Modal(document.getElementById('errorDialog'), {
+            keyboard: false
+          });
           dialog.show();
         } else if (json.playing) {
           document.getElementById("loader").style.display = "inline-block";
@@ -189,7 +195,7 @@ if (urlParams.has("server")) {
           if (json.total <= 0 || json.total === null) {
             var sec = Math.floor(json.now % 60);
             var min = Math.floor((json.now - sec) / 60);
-            document. getElementById("timeT").innerHTML = `${min < 10 ? "0" + min : min}:${sec < 10 ? "0" + sec : sec}`;
+            document.getElementById("timeT").innerHTML = `${min < 10 ? "0" + min : min}:${sec < 10 ? "0" + sec : sec}`;
             document.getElementById("timeP").style.width = "100%";
           } else {
             var nowSec = Math.floor(json.now % 60);
@@ -218,7 +224,9 @@ if (urlParams.has("server")) {
     errCount += 1;
     if (errCount >= 3) {
       document.getElementById("errorInfo").innerHTML = error;
-      let dialog = new bootstrap.Modal(document.getElementById('errorDialog'), { keyboard: false });
+      let dialog = new bootstrap.Modal(document.getElementById('errorDialog'), {
+        keyboard: false
+      });
       dialog.show();
       clearInterval(sendInterval);
     }
@@ -236,7 +244,10 @@ if (urlParams.has("server")) {
 }
 if (getCookie("token")) {
   document.getElementById("user-username").innerHTML = "正在登入...";
-  fetch('https://api.blackcatbot.tk/api/auth/info?token=' + getCookie("token"), { mode: "cors", "Access-Control-Allow-Origin": "*" }).then(res => res.json()).then(userJson => {
+  fetch('https://api.blackcatbot.tk/api/auth/info?token=' + getCookie("token"), {
+    mode: "cors",
+    "Access-Control-Allow-Origin": "*"
+  }).then(res => res.json()).then(userJson => {
     document.getElementById("user-avatar").src = `https://cdn.discordapp.com/avatars/${userJson.id}/${userJson.avatar}`;
     document.getElementById("user-username").innerHTML = userJson.username;
     userid = userJson.id;
@@ -264,12 +275,17 @@ document.getElementById("controlPause").onclick = function () {
     let dialog = new bootstrap.Modal(document.getElementById('loginDialog'));
     dialog.show();
   } else {
-    fetch(`https://api.blackcatbot.tk/api/pause?guild=${urlParams.get("server")}&token=${getCookie("token")}`, { mode: "cors", "Access-Control-Allow-Origin": "*" }).then(res => res.json()).then(json => {
+    fetch(`https://api.blackcatbot.tk/api/pause?guild=${urlParams.get("server")}&token=${getCookie("token")}`, {
+      mode: "cors",
+      "Access-Control-Allow-Origin": "*"
+    }).then(res => res.json()).then(json => {
       if (json.red) toast(true, json.message);
-      else if(!json.error) toast(false, json.message);
+      else if (!json.error) toast(false, json.message);
       else {
         document.getElementById("errorInfo").innerHTML = error;
-        let dialog = new bootstrap.Modal(document.getElementById('errorDialog'), { keyboard: false });
+        let dialog = new bootstrap.Modal(document.getElementById('errorDialog'), {
+          keyboard: false
+        });
         dialog.show();
       }
     }).catch(() => toast(true, "無法發送指令"));
@@ -280,12 +296,17 @@ document.getElementById("controlPlay").onclick = function () {
     let dialog = new bootstrap.Modal(document.getElementById('loginDialog'));
     dialog.show();
   } else {
-    fetch(`https://api.blackcatbot.tk/api/resume?guild=${urlParams.get("server")}&token=${getCookie("token")}`, { mode: "cors", "Access-Control-Allow-Origin": "*" }).then(res => res.json()).then(json => {
+    fetch(`https://api.blackcatbot.tk/api/resume?guild=${urlParams.get("server")}&token=${getCookie("token")}`, {
+      mode: "cors",
+      "Access-Control-Allow-Origin": "*"
+    }).then(res => res.json()).then(json => {
       if (json.red) toast(true, json.message);
-      else if(!json.error) toast(false, json.message);
+      else if (!json.error) toast(false, json.message);
       else {
         document.getElementById("errorInfo").innerHTML = error;
-        let dialog = new bootstrap.Modal(document.getElementById('errorDialog'), { keyboard: false });
+        let dialog = new bootstrap.Modal(document.getElementById('errorDialog'), {
+          keyboard: false
+        });
         dialog.show();
       }
     }).catch(() => toast(true, "無法發送指令"));
@@ -296,14 +317,40 @@ document.getElementById("controlSkip").onclick = function () {
     let dialog = new bootstrap.Modal(document.getElementById('loginDialog'));
     dialog.show();
   } else {
-    fetch(`https://api.blackcatbot.tk/api/skip?guild=${urlParams.get("server")}&token=${getCookie("token")}`, { mode: "cors", "Access-Control-Allow-Origin": "*" }).then(res => res.json()).then(json => {
+    fetch(`https://api.blackcatbot.tk/api/skip?guild=${urlParams.get("server")}&token=${getCookie("token")}`, {
+      mode: "cors",
+      "Access-Control-Allow-Origin": "*"
+    }).then(res => res.json()).then(json => {
       if (json.red) toast(true, json.message);
-      else if(!json.error) toast(false, json.message);
+      else if (!json.error) toast(false, json.message);
       else {
         document.getElementById("errorInfo").innerHTML = error;
-        let dialog = new bootstrap.Modal(document.getElementById('errorDialog'), { keyboard: false });
+        let dialog = new bootstrap.Modal(document.getElementById('errorDialog'), {
+          keyboard: false
+        });
         dialog.show();
       }
     }).catch(() => toast(true, "無法發送指令"));
   }
 };
+document.getElementById("controlVolume").onclick = function () {
+  if (!getCookie("token")) {
+    let dialog = new bootstrap.Modal(document.getElementById('loginDialog'));
+    dialog.show();
+  } else {
+    fetch(`https://api.blackcatbot.tk/api/skip?guild=${urlParams.get("server")}&token=${getCookie("token")}`, {
+      mode: "cors",
+      "Access-Control-Allow-Origin": "*"
+    }).then(res => res.json()).then(json => {
+      if (json.red) toast(true, json.message);
+      else if (!json.error) toast(false, json.message);
+      else {
+        document.getElementById("errorInfo").innerHTML = error;
+        let dialog = new bootstrap.Modal(document.getElementById('errorDialog'), {
+          keyboard: false
+        });
+        dialog.show();
+      }
+    }).catch(() => toast(true, "無法發送指令"));
+  }
+}

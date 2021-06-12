@@ -89,3 +89,8 @@ a:active {
 #user-container:hover {
   background-color: purple;
 }
+
+#controlPanel {
+  background-color: #333333;
+  border-radius: 10px 10px 0 0;
+}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
   <!--Arc io-->
   <script async src="https://arc.io/widget.min.js#kJumrvnj"></script>
@@ -8,7 +9,10 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-178450608-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
     gtag('config', 'UA-178450608-1');
   </script>
@@ -114,7 +118,8 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-          <button type="button" class="btn btn-primary" id="login"><img src="../discord.svg" width="20px" height="20px" alt="Discord">
+          <button type="button" class="btn btn-primary" id="login"><img src="../discord.svg" width="20px" height="20px"
+              alt="Discord">
             使用Discord登入</button>
         </div>
       </div>
@@ -168,31 +173,29 @@
       <div class="progress bg-white rounded-pill" id="time">
         <div class="progress-bar bg-info" id="timeP" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
-      <br>
-      <div class="container bg-white rounded" id="controlPanel">
-        <div class="row justify-content-md-center">
-          <div class="col col-lg-1">
-            <button class="btn" id="lyricsButton"><i class="bi bi-chat-right-text-fill fs-5 text-info"></i></button>
-          </div>
-          <div class="col col-lg-1">
-            <button class="btn" id="controlPlay"><i class="bi bi-play-fill fs-5 text-info"></i></button>
-            <button class="btn" id="controlPause"><i class="bi bi-pause-fill fs-5 text-info"></i></button>
-          </div>
-          <div class="col col-lg-1">
-            <button class="btn" id="controlSkip"><i class="bi bi-skip-forward-fill fs-5 text-info"></i></button>
-          </div>
-          <div class="col col-lg-1" hidden>
-            <button class="btn" id="controlVolume"><i class="bi bi-volume-up-fill fs-5 text-info"></i></button>
-          </div>
-          <div class="col col-lg-1" hidden>
-            <button class="btn" id="controlAdd"><i class="bi bi-file-earmark-plus-fill fs-5 text-info"></i></button>
-          </div>
-        </div>
-      </div>
-      <br>
     </div>
   </div>
   <br>
+  <div class="fixed-bottom w-100" id="controlPanel">
+    <div class="row justify-content-md-center">
+      <div class="col col-lg-1">
+        <button class="btn" id="lyricsButton"><i class="bi bi-chat-right-text-fill fs-4 text-info"></i></button>
+      </div>
+      <div class="col col-lg-1">
+        <button class="btn" id="controlPlay"><i class="bi bi-play-fill fs-4 text-info"></i></button>
+        <button class="btn" id="controlPause"><i class="bi bi-pause-fill fs-4 text-info"></i></button>
+      </div>
+      <div class="col col-lg-1">
+        <button class="btn" id="controlSkip"><i class="bi bi-skip-forward-fill fs-4 text-info"></i></button>
+      </div>
+      <div class="col col-lg-1" hidden>
+        <button class="btn" id="controlVolume"><i class="bi bi-volume-up-fill fs-4 text-info"></i></button>
+      </div>
+      <div class="col col-lg-1" hidden>
+        <button class="btn" id="controlAdd"><i class="bi bi-file-earmark-plus-fill fs-4 text-info"></i></button>
+      </div>
+    </div>
+  </div>
   <script src="../js/bootstrap.bundle.min.js"></script>
   <script src="script.js"></script>
 </body>
