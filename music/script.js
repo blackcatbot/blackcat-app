@@ -142,7 +142,6 @@ if (urlParams.has("server")) {
           document.getElementById("time").style.display = "none";
           document.getElementById("timeT").style.display = "none";
           document.getElementById("controlPanel").style.display = "none";
-          document.getElementById("container").style.backgroundColor = "rgba(0,0,0,0)";
           document.getElementById("songtitle").style.color = "#ffffff";
           document.getElementById("link").href = "#";
           document.getElementById("srv").innerHTML = "Black cat";
@@ -164,8 +163,6 @@ if (urlParams.has("server")) {
           document.getElementById("thumbnail").style.display = "inline-block";
           document.getElementById("controlPanel").style.display = "";
           document.getElementById("time").style.display = "";
-          document.getElementById("container").style.backgroundColor = "white";
-          document.getElementById("songtitle").style.color = "black";
           document.getElementById("timeT").style.display = "block";
           if (json.pause) {
             document.getElementById("controlPlay").style.display = "none";
@@ -175,12 +172,12 @@ if (urlParams.has("server")) {
             document.getElementById("controlPlay").style.display = "";
           }
           if (document.getElementById("thumbnail").src !== json.thumbnail) {
-            let imgVM = new Image();
-            imgVM.src = json.thumbnail;
-            imgVM.onload = function () {
+            let testImg = new Image();
+            testImg.src = json.thumbnail;
+            testImg.onload = function () {
               let percent, height;
-              percent = imgVM.width / 240;
-              height = imgVM.height / percent;
+              percent = testImg.width / 240;
+              height = testImg.height / percent;
               document.getElementById("thumbnail").height = height;
             }
             document.getElementById("thumbnail").src = json.thumbnail;
@@ -210,7 +207,6 @@ if (urlParams.has("server")) {
           document.getElementById("time").style.display = "none";
           document.getElementById("timeT").style.display = "none";
           document.getElementById("controlPanel").style.display = "none";
-          document.getElementById("container").style.backgroundColor = "rgba(0,0,0,0)";
           document.getElementById("songtitle").style.color = "#ffffff";
           document.getElementById("link").href = "#";
           document.getElementById("srv").innerHTML = "Black cat";
@@ -235,7 +231,6 @@ if (urlParams.has("server")) {
   document.getElementById("time").style.display = "none";
   document.getElementById("timeT").style.display = "none";
   document.getElementById("controlPanel").style.display = "none";
-  document.getElementById("container").style.backgroundColor = "rgba(0,0,0,0)";
   document.getElementById("songtitle").style.color = "#ffffff";
   document.getElementById("songtitle").innerHTML = "請輸入伺服器ID或是使用Black cat在播放時提供的網址!";
 }
