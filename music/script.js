@@ -1,6 +1,5 @@
 const urlParams = new URLSearchParams(window.location.search);
-let current, errCount = 0,
-  userid = null;
+let current, errCount = 0, userid = null, volumeDialogOpened = false;
 /**
  * Get a cookie value
  * @param {String} cname Cookie name
@@ -205,6 +204,11 @@ if (urlParams.has("server")) {
             document.getElementById("timeT").innerHTML = `${nowMin < 10 ? "0" + nowMin : nowMin}:${nowSec < 10 ? "0" + nowSec : nowSec}/${totalMin < 10 ? "0" + totalMin : totalMin}:${totalSec < 10 ? "0" + totalSec : totalSec}`;
             document.getElementById("timeP").style.width = `${(json.now / json.total) * 100}%`;
           }
+          document.getElementById("volumeText").innerHTML = `目前音量: ${json.volume}%`;
+          if (!volumeDialogOpened) {
+            document.getElementById("setVolume").innerHTML = `設定音量至: ${json.volume}%`;
+            document.getElementById("volumeRange").value = json.volume;
+          }
           document.getElementById("loader").style.display = "none";
         } else {
           document.getElementById("songtitle").innerHTML = "伺服器沒有在播放音樂";
@@ -270,6 +274,37 @@ document.getElementById("logout").onclick = function () {
   deleteCookie("token");
   window.location.reload();
 };
+document.getElementById("controlVolume").onclick = function () {
+  if (!getCookie("token")) {
+    let dialog = new bootstrap.Modal(document.getElementById('loginDialog'));
+    dialog.show();
+  } else {
+    let dialog = new bootstrap.Modal(document.getElementById('volumeDialog'));
+    dialog.show();
+    volumeDialogOpened = true;
+  }
+};
+document.getElementById("setVolume").onclick = function () {
+  if (!getCookie("token")) {
+    let dialog = new bootstrap.Modal(document.getElementById('loginDialog'));
+    dialog.show();
+  } else {
+    fetch(`https://api.blackcatbot.tk/api/volume?guild=${urlParams.get("server")}&token=${getCookie("token")}&volume=${document.getElementById("volumeRange").value}`, {
+      mode: "cors",
+      "Access-Control-Allow-Origin": "*"
+    }).then(res => res.json()).then(json => {
+      if (json.red) toast(true, json.message);
+      else if (!json.error) toast(false, json.message);
+      else {
+        document.getElementById("errorInfo").innerHTML = error;
+        let dialog = new bootstrap.Modal(document.getElementById('errorDialog'), {
+          keyboard: false
+        });
+        dialog.show();
+      }
+    }).catch(() => toast(true, "無法發送指令"));
+  }
+}
 document.getElementById("controlPause").onclick = function () {
   if (!getCookie("token")) {
     let dialog = new bootstrap.Modal(document.getElementById('loginDialog'));

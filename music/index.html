@@ -142,6 +142,25 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="volumeDialog" tabindex="-1" aria-labelledby="volumeDialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="volumeDialogTitle">變更目前音量</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="fs-2 text-center" id="volumeText"></p>
+          <br>
+          <input type="range" class="form-range" min="0" max="100" id="volumeRange">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="setVolume">設定音量至</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div aria-live="polite" aria-atomic="true" class="bg-dark position-relative bd-example-toasts">
     <div class="toast-container position-absolute p-3 start-50 translate-middle-x">
       <div class="toast bg-primary" id="toast">
@@ -183,13 +202,12 @@
       </div>
       <div class="col col-md-2">
         <button class="btn" id="controlPlay"><i class="bi bi-play-fill fs-4 text-info"></i></button>
-        <br>
         <button class="btn" id="controlPause"><i class="bi bi-pause-fill fs-4 text-info"></i></button>
       </div>
       <div class="col col-md-2">
         <button class="btn" id="controlSkip"><i class="bi bi-skip-forward-fill fs-4 text-info"></i></button>
       </div>
-      <div class="col col-md-2" hidden>
+      <div class="col col-md-2">
         <button class="btn" id="controlVolume"><i class="bi bi-volume-up-fill fs-4 text-info"></i></button>
       </div>
       <div class="col col-md-2" hidden>
