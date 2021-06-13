@@ -23,10 +23,15 @@ function getCookie(cname) {
 /**
  * Delete a cookie
  * @param {String} name Cookie name
+ * @param {String} path Path
+ * @param {String} domain Domain name
  */
-function deleteCookie(name) {
-  document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT';
-};
+function deleteCookie(name, path, domain) {
+  document.cookie = name + "=" +
+    ((path) ? ";path="+path:"")+
+    ((domain)?";domain="+domain:"") +
+    ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+}
 /**
  * Toast message
  * @param {Boolean} red Toast message as red?
@@ -271,7 +276,7 @@ document.getElementById("login").onclick = function () {
   document.location.href = "https://discord.com/api/oauth2/authorize?client_id=848006097197334568&redirect_uri=https%3A%2F%2Fapi.blackcatbot.tk%2Fapi%2Fauth%2Flogin&response_type=code&scope=guilds%20identify";
 };
 document.getElementById("logout").onclick = function () {
-  deleteCookie("token");
+  deleteCookie("token", undefined, ".blackcatbot.tk");
   window.location.reload();
 };
 document.getElementById("controlVolume").onclick = function () {
