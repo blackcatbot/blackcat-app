@@ -9,6 +9,6 @@ if (urlParams.has("code")) {
       window.opener.postMessage({
         token: json.token,
         isFromBlackcat: true
-      });
+      }, "https://blackcatbot.tk");
     });
 }
