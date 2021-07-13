@@ -7,7 +7,8 @@ if (urlParams.has("code")) {
     })
     .then(json => {
       window.opener.postMessage({
-        token: json.token
+        token: json.token,
+        isFromBlackcat: true
       }, window.opener.location);
     });
 }

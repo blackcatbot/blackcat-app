@@ -291,7 +291,7 @@ document.getElementById("login").onclick = function () {
   let openWindow = window.open("https://discord.com/api/oauth2/authorize?client_id=848006097197334568&redirect_uri=https%3A%2F%2Fapp.blackcatbot.tk%2Fcallback%2F&response_type=code&scope=identify%20guilds&prompt=none", "login", windowOpts);
 
   window.addEventListener("message", event => {
-    if (event.origin !== "https://app.blackcatbot.tk") return;
+    if (!event.data.isFromBlackcat) return;
     document.cookie = `token=${event.data.token};max-age:${60 * 60 * 12};`
     openWindow.close();
   });
