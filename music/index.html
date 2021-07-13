@@ -43,9 +43,16 @@
           <img src="../boticon.png" alt="Black cat logo" width="60px" height="60px"
             class="d-inline align-top img-thumbnail" style="border-radius: 50%">
         </a>
-        <div class="d-flex justify-content-end align-items-center rounded" id="user-container">
-          <img src="../boticon.png" width="65px" height="65px" id="user-avatar" class="rounded-circle" alt="Black cat">
-          <div class="fs-3 text-light" id="user-username">沒有登入</div>
+        <div class="d-flex justify-content-end align-items-center rounded-pill" id="user-container">
+          <img src="#" width="45px" height="45px" id="user-avatar" class="rounded-circle" alt="User avatar">
+          <div id="login-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+              <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+            </svg>
+          </div>
+          &nbsp;&nbsp;
+          <div class="fs-3" id="user-username">登入</div>
         </div>
       </div>
     </nav>
@@ -206,9 +213,6 @@
       </div>
       <div class="col col-md-2">
         <button class="btn" id="controlSkip"><i class="bi bi-skip-forward-fill fs-4 text-info"></i></button>
-      </div>
-      <div class="col col-md-2" hidden>
-        <button class="btn" id="controlVolume"><i class="bi bi-volume-up-fill fs-4 text-info"></i></button>
       </div>
       <div class="col col-md-2" hidden>
         <button class="btn" id="controlAdd"><i class="bi bi-file-earmark-plus-fill fs-4 text-info"></i></button>

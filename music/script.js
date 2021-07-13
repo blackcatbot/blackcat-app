@@ -252,6 +252,7 @@ if (urlParams.has("server")) {
   document.getElementById("songtitle").innerHTML = "請輸入伺服器ID或是使用Black cat在播放時提供的網址!";
 }
 if (getCookie("token")) {
+  document.getElementById("login-icon").style.display = "none"
   document.getElementById("user-username").innerHTML = "正在登入...";
   fetch('https://api.blackcatbot.tk/api/auth/info?token=' + getCookie("token"), {
     mode: "cors",
@@ -261,6 +262,10 @@ if (getCookie("token")) {
     document.getElementById("user-username").innerHTML = userJson.username;
     userid = userJson.id;
   });
+} else {
+  document.getElementById("user-avatar").style.display = "none";
+  document.getElementById("login-icon").style.display = "";
+  document.getElementById("user-username").innerHTML = "登入"
 }
 document.getElementById("user-container").onclick = function () {
   if (getCookie("token")) {
@@ -272,11 +277,27 @@ document.getElementById("user-container").onclick = function () {
   }
 };
 document.getElementById("login").onclick = function () {
-  if (urlParams.has("server")) document.cookie = `server=${urlParams.get("server")}`;
-  document.location.href = "https://discord.com/api/oauth2/authorize?client_id=848006097197334568&redirect_uri=https%3A%2F%2Fapi.blackcatbot.tk%2Fapi%2Fauth%2Flogin&response_type=code&scope=guilds%20identify";
+  const windowArea = {
+    width: Math.floor(window.outerWidth * 0.8),
+    height: Math.floor(window.outerHeight * 0.5),
+  };
+  if (windowArea.width < 1000) { windowArea.width = 1000; }
+  if (windowArea.height < 630) { windowArea.height = 630; }
+  windowArea.left = Math.floor(window.screenX + ((window.outerWidth - windowArea.width) / 2));
+  windowArea.top = Math.floor(window.screenY + ((window.outerHeight - windowArea.height) / 8));
+  const windowOpts = `toolbar=0,scrollbars=1,status=1,resizable=1,location=1,menuBar=0,
+    width=${windowArea.width},height=${windowArea.height},
+    left=${windowArea.left},top=${windowArea.top}`;
+  let openWindow = window.open("https://app.blackcatbot.tk/callback", "login", windowOpts);
+
+  window.addEventListener("message", event => {
+    if (event.origin !== "https://app.blackcatbot.tk") return;
+    document.cookie = `token=${event.data.token};max-age:${60 * 60 * 12};`
+    openWindow.close();
+  });
 };
 document.getElementById("logout").onclick = function () {
-  deleteCookie("token", undefined, ".blackcatbot.tk");
+  deleteCookie("token");
   window.location.reload();
 };
 document.getElementById("controlVolume").onclick = function () {
@@ -289,27 +310,6 @@ document.getElementById("controlVolume").onclick = function () {
     volumeDialogOpened = true;
   }
 };
-document.getElementById("setVolume").onclick = function () {
-  if (!getCookie("token")) {
-    let dialog = new bootstrap.Modal(document.getElementById('loginDialog'));
-    dialog.show();
-  } else {
-    fetch(`https://api.blackcatbot.tk/api/volume?guild=${urlParams.get("server")}&token=${getCookie("token")}&volume=${document.getElementById("volumeRange").value}`, {
-      mode: "cors",
-      "Access-Control-Allow-Origin": "*"
-    }).then(res => res.json()).then(json => {
-      if (json.red) toast(true, json.message);
-      else if (!json.error) toast(false, json.message);
-      else {
-        document.getElementById("errorInfo").innerHTML = error;
-        let dialog = new bootstrap.Modal(document.getElementById('errorDialog'), {
-          keyboard: false
-        });
-        dialog.show();
-      }
-    }).catch(() => toast(true, "無法發送指令"));
-  }
-}
 document.getElementById("controlPause").onclick = function () {
   if (!getCookie("token")) {
     let dialog = new bootstrap.Modal(document.getElementById('loginDialog'));
