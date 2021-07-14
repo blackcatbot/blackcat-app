@@ -285,7 +285,7 @@ document.getElementById("login").onclick = function () {
   if (windowArea.height < 630) { windowArea.height = 630; }
   windowArea.left = Math.floor(window.screenX + ((window.outerWidth - windowArea.width) / 2));
   windowArea.top = Math.floor(window.screenY + ((window.outerHeight - windowArea.height) / 8));
-  const windowOpts = `toolbar=0,scrollbars=1,status=1,resizable=1,location=1,menuBar=0,
+  const windowOpts = `toolbar=0,scrollbars=1,status=0,resizable=1,location=0,menuBar=0,
     width=${windowArea.width},height=${windowArea.height},
     left=${windowArea.left},top=${windowArea.top}`;
   let openWindow = window.open("https://discord.com/api/oauth2/authorize?client_id=848006097197334568&redirect_uri=https%3A%2F%2Fapp.blackcatbot.tk%2Fcallback%2F&response_type=code&scope=identify%20guilds", "login", windowOpts);
