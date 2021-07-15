@@ -1,13 +1,11 @@
-@keyframes loading {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 100;
-  }
-  100% {
-    opacity: 0;
-  }
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 body {
@@ -18,28 +16,87 @@ input, select, textarea, button {
   font-family: 'Noto Sans TC', sans-serif;
 }
 
+.title {
+  color: white;
+}
+
+.serverid {
+  background-color: #23272A;
+  border-radius: 15px;
+  border-style: solid;
+  border-color: white;
+  height: 30px;
+  width: 250px;
+  text-align: center;
+  color: white;
+}
+
+.query {
+  width: 100px;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+.container {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.out {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid #3498db;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+}
+
+.fill-width {
+  width: 100%;
+}
+
 #user-container {
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 50px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color: transparent;
-  cursor: pointer;
+  background-color: black;
+  color: white;
   transition: 0.5s;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 #user-container:hover {
-  background-color: purple;
-}
-
-.srv {
   background-color: white;
-  overflow: hidden;
-  overflow-x: scroll;
-  white-space: nowrap;
+  color: black;
 }
 
-.loading {
-  animation: loading 2.5s infinite;
+#controlPanel {
+  background-color: #333333;
+  border-radius: 10px 10px 0 0;
 }
