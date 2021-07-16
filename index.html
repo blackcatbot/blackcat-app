@@ -28,15 +28,15 @@
   <link rel="canonical" href="https://app.blackcatbot.tk/">
   <link rel="icon" href="favicon.png">
 </head>
-<body class="bg-dark">
+<body class="bg-light">
   <div class="sticky-top bg-transparent">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+    <nav class="navbar navbar-expand-lg" style="background-color: #5865F2;">
       <div class="container-fluid">
         <a class="navbar-brand" href="https://app.blackcatbot.tk">
           <img src="boticon.png" alt="Black cat logo" width="60px" height="60px"
             class="d-inline align-top img-thumbnail" style="border-radius: 50%">
         </a>
-        <div class="d-flex justify-content-end align-items-center rounded-pill" id="user-container">
+        <div class="d-flex justify-content-end align-items-center rounded-pill float-on-hover" id="user-container">
           <img src="#" width="45px" height="45px" id="user-avatar" class="rounded-circle" alt="User avatar">
           <div id="login-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
@@ -174,30 +174,30 @@
   <div aria-live="polite" aria-atomic="true" class="bg-dark position-relative bd-example-toasts">
     <div class="toast-container position-absolute p-3 start-50 translate-middle-x">
       <div class="toast bg-primary" id="toast">
-        <div class="toast-body text-center text-light">
+        <div class="toast-body text-center ">
           <h6 id="toastInfo"></h6>
         </div>
       </div>
     </div>
   </div>
   <br>
-  <h3 class="text-center text-light" id="srv">Black cat</h3>
-  <div class="out">
+  <div class="out" id="out" style="opacity: 0;">
     <div class="container" id="container">
+      <h3 class="text-center " id="srv">Black cat</h3>
       <br>
       <img src="./banner.jpg" class="rounded" id="thumbnail" width="240px" height="140px">
       <center>
         <div class="loader" id="loader"></div>
       </center>
       <a href="#" id="link" class="link">
-        <p class="fs-4 text-white" id="songtitle">正在取得歌曲資訊...</p>
+        <p class="fs-4 text-black" id="songtitle">正在取得歌曲資訊...</p>
       </a>
       <center>
-        <input type="text" class="form-control bg-dark text-light rounded-pill" id="serverid" placeholder="伺服器ID"
+        <input type="text" class="form-control rounded-pill" id="serverid" placeholder="伺服器ID"
           style="text-align:center;" aria-describedby="serverid">
       </center>
       <br>
-      <button type="button" id="query" class="btn btn-outline-light rounded-pill">查詢!</button>
+      <button type="button" id="query" class="btn btn-outline-dark rounded-pill">查詢!</button>
       <p id="timeT" class="fs-9 text-white"></p>
       <div class="progress bg-white rounded-pill" id="time">
         <div class="progress-bar bg-info" id="timeP" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>

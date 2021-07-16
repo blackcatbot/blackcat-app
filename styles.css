@@ -16,6 +16,10 @@ input, select, textarea, button {
   font-family: 'Noto Sans TC', sans-serif;
 }
 
+nav {
+  box-shadow: 0 4px 6px 0 rgba(0,0,0,.2);
+}
+
 .title {
   color: white;
 }
@@ -85,18 +89,32 @@ a:active {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color: black;
-  color: white;
-  transition: 0.5s;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-}
-
-#user-container:hover {
   background-color: white;
   color: black;
+  transition: 0.5s;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 #controlPanel {
   background-color: #333333;
   border-radius: 10px 10px 0 0;
+}
+
+.float-on-hover {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+.float-on-hover:hover, .float-on-hover:focus, .float-on-hover:active {
+  -webkit-transform: translateY(-8px);
+  transform: translateY(-8px);
 }

@@ -1,5 +1,8 @@
-const urlParams = new URLSearchParams(window.location.search);
 let current, errCount = 0, userid = null, volumeDialogOpened = false;
+const urlParams = new URLSearchParams(window.location.search);
+function $(id) {
+  return document.getElementById(id);
+}
 /**
  * Get a cookie value
  * @param {String} cname Cookie name
@@ -49,13 +52,6 @@ function toast(red, info) {
   let toast = new bootstrap.Toast($("toast"));
   toast.show();
 }
-/**
- * Get element
- * @param { String } id Element id
- */
-function $(id) {
-  return document.getElementById(id);
-}
 window.onload = function () {
   if (getCookie("server")) {
     window.location = `https://app.blackcatbot.tk/music/?server=${getCookie("server")}`;
@@ -69,7 +65,18 @@ $("query").onclick = function () {
     let dialog = new bootstrap.Modal($('invalidDialog'));
     dialog.show();
   } else {
-    window.location.href = "https://app.blackcatbot.tk/music/?server=" + $("serverid").value;
+    var target = $("out");
+    var fadeEffect = setInterval(function() {
+      if (!target.style.opacity) {
+        target.style.opacity = 1;
+      }
+      if (target.style.opacity > 0) {
+        target.style.opacity -= 0.05;
+      } else {
+        clearInterval(fadeEffect);
+        window.location.href = "https://app.blackcatbot.tk/music/?server=" + $("serverid").value;
+      }
+    }, 20);
   }
 };
 $("reload").onclick = function () {
@@ -115,6 +122,16 @@ $("lyricsDialog").addEventListener("hidden.bs.modal", () => {
   $("lyricsText").innerHTML = "";
 });
 if (urlParams.has("server")) {
+  var opacity = 0;
+  var target = $("out");
+  var fadeEffect = setInterval(function() {
+    if (target.style.opacity >= 1) {
+      clearInterval(fadeEffect);
+    } else {
+      opacity += .05;
+      target.style.opacity = opacity;
+    }
+  }, 10);
   fetch("https://api.blackcatbot.tk/api/exist?server=" + urlParams.get("server"), {
     mode: "cors",
     "Access-Control-Allow-Origin": "*"
@@ -157,7 +174,6 @@ if (urlParams.has("server")) {
           $("time").style.display = "none";
           $("timeT").style.display = "none";
           $("controlPanel").style.display = "none";
-          $("songtitle").style.color = "#ffffff";
           $("link").href = "#";
           $("srv").innerHTML = "Black cat";
           document.title = "Black cat | 播放狀態";
@@ -229,7 +245,6 @@ if (urlParams.has("server")) {
           $("time").style.display = "none";
           $("timeT").style.display = "none";
           $("controlPanel").style.display = "none";
-          $("songtitle").style.color = "#ffffff";
           $("link").href = "#";
           $("srv").innerHTML = "Black cat";
           document.title = "Black cat | 播放狀態";
@@ -255,7 +270,6 @@ if (urlParams.has("server")) {
   $("time").style.display = "none";
   $("timeT").style.display = "none";
   $("controlPanel").style.display = "none";
-  $("songtitle").style.color = "#ffffff";
   $("songtitle").innerHTML = "請輸入伺服器ID或是使用Black cat在播放時提供的網址!";
 }
 if (getCookie("token")) {
@@ -371,24 +385,5 @@ $("controlSkip").onclick = function () {
     }).catch(() => toast(true, "無法發送指令"));
   }
 };
-$("controlVolume").onclick = function () {
-  if (!getCookie("token")) {
-    let dialog = new bootstrap.Modal($('loginDialog'));
-    dialog.show();
-  } else {
-    fetch(`https://api.blackcatbot.tk/api/skip?guild=${urlParams.get("server")}&token=${getCookie("token")}`, {
-      mode: "cors",
-      "Access-Control-Allow-Origin": "*"
-    }).then(res => res.json()).then(json => {
-      if (json.red) toast(true, json.message);
-      else if (!json.error) toast(false, json.message);
-      else {
-        $("errorInfo").innerHTML = error;
-        let dialog = new bootstrap.Modal($('errorDialog'), {
-          keyboard: false
-        });
-        dialog.show();
-      }
-    }).catch(() => toast(true, "無法發送指令"));
-  }
-}
+
+if (!urlParams.has("server")) $("out").style.opacity = 1;
