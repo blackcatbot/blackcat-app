@@ -178,7 +178,7 @@ if (urlParams.has("server")) {
       ws.onopen = function () {
         let interval;
         log("Connected to WebSocket", "ws");
-        log(`Connection took ${Date.now() - connectStart}`, "ws");
+        log(`Connection took ${Date.now() - connectStart}ms`, "ws");
         try {
           interval = setInterval(function () {
             ws.send(JSON.stringify({
@@ -294,6 +294,7 @@ if (urlParams.has("server")) {
   $("songtitle").innerHTML = "請輸入伺服器ID或是使用Black cat在播放時提供的網址!";
 }
 if (getCookie("token")) {
+  log("Logging in", "auth");
   $("login-icon").style.display = "none"
   $("user-username").innerHTML = "正在登入...";
   fetch('https://api.blackcatbot.tk/api/auth/info?token=' + getCookie("token"), {
@@ -337,6 +338,10 @@ $("login").onclick = function () {
     document.cookie = `token=${event.data.token};max-age:${60 * 60 * 12};`
     openWindow.close();
     location.reload();
+  });
+  openWindow.addEventListener("close", () => {
+    let dialog = new bootstrap.Modal($('loginDialog'));
+    if (dialog._isShown) dialog.hide();
   });
 };
 $("logout").onclick = function () {
