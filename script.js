@@ -3,11 +3,28 @@ const urlParams = new URLSearchParams(window.location.search);
 function $(id) {
   return document.getElementById(id);
 }
-/**
- * Get a cookie value
- * @param {String} cname Cookie name
- * @returns Cookie Value
- */
+function log(content, from) {
+  let text = "", color = "";
+  switch(from) {
+    case "ws":
+      text = "[WebSocket]";
+      color = "purple";
+      break;
+    case "auth":
+      text = "[Oauth2]";
+      color = "red";
+     break;
+    case "api":
+      text = "[API]";
+      color = "dodgerblue"
+      break;
+    default:
+      text = "[Console]";
+      color = "yellow";
+      break;
+  }
+  console.log(`%c ${text}`, `color: ${color}`, content);
+}
 function getCookie(cname) {
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
@@ -23,23 +40,12 @@ function getCookie(cname) {
   }
   return "";
 };
-/**
- * Delete a cookie
- * @param {String} name Cookie name
- * @param {String} path Path
- * @param {String} domain Domain name
- */
 function deleteCookie(name, path, domain) {
   document.cookie = name + "=" +
-    ((path) ? ";path="+path:"")+
-    ((domain)?";domain="+domain:"") +
+    ((path) ? ";path=" + path : "") +
+    ((domain) ? ";domain=" + domain : "") +
     ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
 }
-/**
- * Toast message
- * @param {Boolean} red Toast message as red?
- * @param {String} info Toast message
- */
 function toast(red, info) {
   if (red) {
     $("toast").classList.remove("bg-primary");
@@ -54,6 +60,7 @@ function toast(red, info) {
 }
 window.onload = function () {
   if (getCookie("server")) {
+    log("Found Cookie named server")
     window.location = `https://app.blackcatbot.tk/?server=${getCookie("server")}`;
     deleteCookie("server");
   }
@@ -66,7 +73,7 @@ $("query").onclick = function () {
     dialog.show();
   } else {
     var target = $("out");
-    var fadeEffect = setInterval(function() {
+    var fadeEffect = setInterval(function () {
       if (!target.style.opacity) {
         target.style.opacity = 1;
       }
@@ -124,7 +131,7 @@ $("lyricsDialog").addEventListener("hidden.bs.modal", () => {
 if (urlParams.has("server")) {
   var opacity = 0;
   var target = $("out");
-  var fadeEffect = setInterval(function() {
+  var fadeEffect = setInterval(function () {
     if (target.style.opacity >= 1) {
       clearInterval(fadeEffect);
     } else {
