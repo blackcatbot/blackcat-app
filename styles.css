@@ -1,23 +1,36 @@
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 body {
   font-family: 'Noto Sans TC', sans-serif;
 }
 
-input, select, textarea, button {
+input,
+select,
+textarea,
+button {
   font-family: 'Noto Sans TC', sans-serif;
 }
 
 nav {
-  box-shadow: 0 4px 6px 0 rgba(0,0,0,.2);
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, .2);
 }
 
 .title {
@@ -92,7 +105,7 @@ a:active {
   background-color: white;
   color: black;
   transition: 0.5s;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 #controlPanel {
@@ -114,7 +127,9 @@ a:active {
   transition-timing-function: ease-out;
 }
 
-.float-on-hover:hover, .float-on-hover:focus, .float-on-hover:active {
+.float-on-hover:hover,
+.float-on-hover:focus,
+.float-on-hover:active {
   -webkit-transform: translateY(-8px);
   transform: translateY(-8px);
 }
