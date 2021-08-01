@@ -12,12 +12,15 @@ function log(content, from) {
       break;
     case "auth":
       text = "[Oauth2]";
-      color = "red";
+      color = "orange";
      break;
     case "api":
       text = "[API]";
       color = "dodgerblue"
       break;
+    case "error":
+      text = "[Error]"
+      color = "red"
     default:
       text = "[Console]";
       color = "yellow";
@@ -60,7 +63,7 @@ function toast(red, info) {
 }
 window.onload = function () {
   if (getCookie("server")) {
-    log("Found Cookie named server")
+    log("Found Cookie named server, deleting cookie")
     window.location = `https://app.blackcatbot.tk/?server=${getCookie("server")}`;
     deleteCookie("server");
   }
@@ -99,19 +102,23 @@ document.title = "Black cat | 播放狀態";
 $("lyricsButton").onclick = function () {
   let dialog = new bootstrap.Modal($('lyricsDialog'));
   dialog.show();
+  log("Sending Lyrics request", "api");
   fetch("https://api.blackcatbot.tk/api/lyrics?title=" + current.title, {
     mode: "cors",
     "Access-Control-Allow-Origin": "*"
   }).then(respone => respone.json()).then(json => {
     if (json.error) {
+      log("Cannot find lyrics", "api");
       $("lyricsLoading").innerHTML = "沒有找到歌詞...";
       $("lyricsProgress").style.display = "none";
     } else {
+      log("Received lyrics", "api")
       $("lyricsText").innerHTML = json.lyrics.replaceAll("\n", "<br>");
       $("lyricsLoading").innerHTML = `${current.title}的歌詞`;
       $("lyricsProgress").style.display = "none";
     }
   }).catch(error => {
+    log("Unknown error, cannot complete lyrics request", "error");
     errCount += 1;
     if (errCount >= 3) {
       $("errorInfo").innerHTML = error;
@@ -119,11 +126,11 @@ $("lyricsButton").onclick = function () {
         keyboard: false
       });
       dialog.show();
-      clearInterval(sendInterval);
     }
   });
 };
 $("lyricsDialog").addEventListener("hidden.bs.modal", () => {
+  log("Lyrics dialog closed, resetting text");
   $("lyricsProgress").style.display = "";
   $("lyricsLoading").innerHTML = "正在取得歌詞...";
   $("lyricsText").innerHTML = "";
@@ -139,6 +146,7 @@ if (urlParams.has("server")) {
       target.style.opacity = opacity;
     }
   }, 10);
+  log("Found parameter server, finding server", "api");
   fetch("https://api.blackcatbot.tk/api/exist?server=" + urlParams.get("server"), {
     mode: "cors",
     "Access-Control-Allow-Origin": "*"
@@ -150,9 +158,8 @@ if (urlParams.has("server")) {
         keyboard: false
       });
       dialog.show();
-      clearInterval(sendInterval);
     } else if (!json.exist) {
-      $("songtitle").innerHTML = "無法取得伺服器的播放狀態... 請使用Black cat提供的網址或再次確認你的伺服器ID!";
+      $("songtitle").innerHTML = "伺服器不存在或者是黑貓無法存取伺服器資訊";
       $("loader").style.display = "none";
       $("thumbnail").style.display = "none";
       $("lyricsButton").style.display = "none";
@@ -161,13 +168,17 @@ if (urlParams.has("server")) {
     } else {
       $("loader").style.display = "none";
       let ws = new WebSocket("wss://api.blackcatbot.tk/api/ws/playing");
+      let connectStart = Date.now();
       ws.onerror = function () {
+        log("Cannot connect to WebSocket", "ws");
         $("errorInfo").innerHTML = "連線錯誤";
         let dialog = new bootstrap.Modal($("errorDialog"));
         dialog.show();
       }
       ws.onopen = function () {
         let interval;
+        log("Connected to WebSocket", "ws");
+        log(`Connection took ${Date.now() - connectStart}`, "ws");
         try {
           interval = setInterval(function () {
             ws.send(JSON.stringify({
@@ -187,12 +198,16 @@ if (urlParams.has("server")) {
           clearInterval(interval);
         }
       }
+      ws.onclose = function () {
+        log("WebSocket disconnected", "ws");
+      }
       ws.onmessage = function (event) {
         let json;
         if (typeof event.data === "string") json = JSON.parse(event.data);
         else json = event.data;
         current = json;
         if (json.error) {
+          log("API error", "api");
           $("errorInfo").innerHTML = json.code;
           let dialog = new bootstrap.Modal($('errorDialog'), {
             keyboard: false
@@ -266,7 +281,6 @@ if (urlParams.has("server")) {
         keyboard: false
       });
       dialog.show();
-      clearInterval(sendInterval);
     }
   });
 } else {
