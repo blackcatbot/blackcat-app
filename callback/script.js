@@ -8,5 +8,13 @@ if (urlParams.has("code")) {
         token: json.token,
         isFromBlackcat: true
       }, "https://app.blackcatbot.tk");
+    })
+    .catch(error => {
+      console.error(error);
+      document.getElementById("progress").style.display = "none";
+      document.getElementById("title").innerText = "請重新登入或檢查網路連接";
     });
+} else {
+  document.getElementById("progress").style.display = "none";
+  document.getElementById("title").innerText = "請重新驗證";
 }
