@@ -31,6 +31,7 @@ let setCookie = (cname, value) => {
   document.cookie = `${encodeURIComponent(cname)}=${encodeURIComponent(value)}; path=/;`
 }
 let queryGuild = () => {
+  document.getElementById("guildInput").value = "";
   document.getElementById("guildContainer").classList.add("hide");
   document.getElementById("guild").style.display = "block";
   setTimeout(() => {
