@@ -30,9 +30,9 @@
   </script>
 </head>
 
-<body class="mdui-theme-layout-dark mdui-theme-primary-blue mdui-theme-accent-indigo mdui-drawer-body-left mdui-appbar-with-toolbar">
+<body class="mdui-theme-primary-blue mdui-theme-accent-indigo mdui-drawer-body-left mdui-appbar-with-toolbar">
   <header class="mdui-appbar mdui-appbar-fixed">
-    <div class="mdui-toolbar mdui-color-theme">
+    <div class="mdui-toolbar mdui-color-blue-600">
       <a class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#drawer'}"><i class="mdui-icon material-icons">menu</i></a>
       <a href="https://app.blackcatbot.tk/new" class="mdui-typo-headline">Black cat music</a>
     </div>
@@ -43,9 +43,13 @@
         <i class="mdui-list-item-icon mdui-icon material-icons">&#xe88a;</i>
         <div class="mdui-list-item-content">首頁</div>
       </a>
+      <div class="mdui-list-item mdui-ripple" id="theme">
+        <i class="mdui-list-item-icon mdui-icon material-icons">&#xe3b7;</i>
+        <div class="mdui-list-item-content">變更主題</div>
+      </div>
       <div class="mdui-divider"></div>
       <div class="mdui-list-item">
-        <div class="mdui-textfield mdui-textfield-floating-label">
+        <div class="mdui-textfield">
           <label class="mdui-textfield-label">伺服器ID</label>
           <input class="mdui-textfield-input" type="number"/>
         </div>
