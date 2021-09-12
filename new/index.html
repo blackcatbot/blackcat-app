@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Black cat | 播放狀態</title>
+  <meta name="og:url" property="og:url" content="https://blackcatbot.tk/app">
+  <meta name="og:title" property="og:title" content="Black cat | 播放狀態">
+  <meta name="og:description" property="og:description" content="在網頁上控制Black cat的音樂">
+  <meta name="og:type" property="og:type" content="website">
+  <meta name="og:image" property="og:image" content="https://blackcatbot.tk/banner.jpg">
+  <meta name="description" content="在網頁上控制Black cat的音樂">
+  <meta name="theme-color" content="#0DCAF0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdui/1.0.2/css/mdui.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="canonical" href="https://app.blackcatbot.tk/">
+  <link rel="icon" href="favicon.png">
+  <script async src="https://arc.io/widget.min.js#kJumrvnj"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-178450608-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-178450608-1');
+  </script>
+</head>
+
+<body class="mdui-theme-layout-dark mdui-theme-primary-blue mdui-theme-accent-indigo mdui-drawer-body-left mdui-appbar-with-toolbar">
+  <header class="mdui-appbar mdui-appbar-fixed">
+    <div class="mdui-toolbar mdui-color-theme">
+      <a class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#drawer'}"><i class="mdui-icon material-icons">menu</i></a>
+      <a href="https://app.blackcatbot.tk/new" class="mdui-typo-headline">Black cat music</a>
+    </div>
+  </header>
+  <div class="mdui-drawer" id="drawer">
+    <div class="mdui-list">
+      <a class="mdui-list-item mdui-ripple" href="https://blackcatbot.tk" target="_blank">
+        <i class="mdui-list-item-icon mdui-icon material-icons">&#xe88a;</i>
+        <div class="mdui-list-item-content">首頁</div>
+      </a>
+      <div class="mdui-divider"></div>
+      <div class="mdui-list-item">
+        <div class="mdui-textfield mdui-textfield-floating-label">
+          <label class="mdui-textfield-label">伺服器ID</label>
+          <input class="mdui-textfield-input" type="number"/>
+        </div>
+        <button class="mdui-btn mdui-color-theme-accent mdui-ripple">快速查詢</button>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdui/1.0.2/js/mdui.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
