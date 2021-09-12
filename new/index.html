@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap">
   <link rel="stylesheet" href="styles.css">
   <link rel="canonical" href="https://app.blackcatbot.tk/">
-  <link rel="icon" href="favicon.png">
+  <link rel="icon" href="../favicon.png">
   <script async src="https://arc.io/widget.min.js#kJumrvnj"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-178450608-1"></script>
   <script>
@@ -49,12 +49,24 @@
       </div>
       <div class="mdui-divider"></div>
       <div class="mdui-list-item">
-        <div class="mdui-textfield">
-          <label class="mdui-textfield-label">伺服器ID</label>
-          <input class="mdui-textfield-input" type="number"/>
-        </div>
-        <button class="mdui-btn mdui-color-theme-accent mdui-ripple">快速查詢</button>
+        <button class="mdui-btn mdui-color-theme-accent mdui-ripple" id="drawerQuery">查詢其他伺服器</button>
       </div>
+    </div>
+  </div>
+  <div class="overlay mdui-color-text-theme" id="connecting">
+    <div>
+      <h1>連線中</h1>
+      <div class="mdui-spinner"></div>
+    </div>
+  </div>
+  <div class="overlay mdui-color-text-theme" id="guild">
+    <div id="guildContainer">
+      <h1>請輸入伺服器ID, 或直接點擊播放訊息上的連結</h1>
+      <div class="mdui-textfield" id="guildForm">
+        <label class="mdui-textfield-label">伺服器ID</label>
+        <input class="mdui-textfield-input" type="number" id="guildInput"/>
+      </div>
+      <button class="mdui-btn mdui-color-theme-accent mdui-ripple" id="guildSubmit">查詢播放進度</button>
     </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mdui/1.0.2/js/mdui.min.js"></script>
