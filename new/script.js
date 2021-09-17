@@ -1,11 +1,11 @@
-let schema = new URLSearchParams(window.location.search);
+let schema = new URLSearchParams(window.location.search), socket;
 let request = (url) => {
-  return new Promise((reslove, reject) => {
+  return new Promise((resolve, reject) => {
     fetch(url, {
       mode: "cors",
       "Access-Control-Allow-Origin": "*"
     })
-      .then(reslove)
+      .then(resolve)
       .catch(reject);
   });
 }
@@ -52,7 +52,16 @@ let queryGuild = () => {
       }
     }
   }
-  document.getElementById("guildInput").addEventListener("keyup", guildHandelEnter)
+  document.getElementById("guildInput").addEventListener("keyup", guildHandelEnter);
+}
+let connect = () => {
+  document.getElementById("connectContainer").classList.add("hide");
+  document.getElementById("connect").style.display = "block";
+  setTimeout(() => {
+    document.getElementById("connect").classList.add("open");
+    document.getElementById("connectContainer").classList.remove("hide");
+  });
+  socket
 }
 if (getCookie("dark") === "1") document.body.classList.add("mdui-theme-layout-dark")
 document.getElementById("theme").onclick = () => {
@@ -80,10 +89,15 @@ document.getElementById("guildSubmit").onclick = () => {
     setTimeout(() => {
       document.getElementById("guild").style.display = "none";
       document.getElementById("guildContainer").classList.remove("hide");
+      setTimeout(() => {
+        connect();
+      }, 100);
     }, 800);
   }
 }
 
 if (!schema.has("guild")) {
   queryGuild();
+} else {
+  connect();
 }
