@@ -1,0 +1,63 @@
+random(a,b)
+  return math(math(0, 'random')*(b - a + 1) + a, 'floor')
+
+@keyframes shake
+  for i in 0..10
+    {10% * i}
+      transform: translate(random(-2, 3), random(-2, 3)) rotate(random(-1, 1)deg)
+
+body
+  font-family: 'Noto Sans TC', sans-serif
+
+body header
+  font-family: Roboto, 'Noto Sans TC', sans-serif
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button
+  -webkit-appearance: none
+  margin: 0
+
+input[type=number]
+  -moz-appearance: textfield
+
+.overlay
+  position: fixed
+  display: none
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  backdrop-filter: blur(8px) opacity(0)
+  z-index: 10000
+  transition: backdrop-filter 0.8s
+
+.overlay.open
+  backdrop-filter: blur(8px) opacity(1)
+
+.overlay > div
+  display: flex
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  align-items: center
+  justify-content: center
+  flex-wrap: nowrap
+  flex-direction: column
+
+.overlay > div.hide
+  opacity: 0
+
+.shake
+  animation: shake 0.5s
+  animation-iteration-count: infinite
+
+.img-container
+  box-shadow: 1px 1.4px 4.1px -1px rgba(0, 0, 0, 0.09),
+  2.8px 3.9px 11.4px -1px rgba(0, 0, 0, 0.059),
+  6.6px 9.3px 27.4px -1px rgba(0, 0, 0, 0.045),
+  22px 31px 91px -1px rgba(0, 0, 0, 0.031)

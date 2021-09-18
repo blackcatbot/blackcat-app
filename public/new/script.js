@@ -1,4 +1,4 @@
-let schema = new URLSearchParams(window.location.search), socket;
+let schema = new URLSearchParams(window.location.search), socket, interval;
 let request = (url) => {
   return new Promise((resolve, reject) => {
     fetch(url, {
@@ -61,7 +61,26 @@ let connect = () => {
     document.getElementById("connect").classList.add("open");
     document.getElementById("connectContainer").classList.remove("hide");
   });
-  socket
+  let wsOpen = () => {
+    document.getElementById("connectContainer").classList.add("hide");
+    document.getElementById("connect").classList.remove("open");
+    setTimeout(() => {
+      document.getElementById("connect").style.display = "none";
+      document.getElementById("connectContainer").classList.remove("hide");
+    }, 800);
+    try {
+      socket.send(JSON.stringify({
+        server: schema.get("guild")
+      }));
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  let wsMessage = () => {
+    
+  }
+  socket = new WebSocket("wss://api.blackcatbot.tk/api/ws/playing");
+  socket.addEventListener("open", wsOpen);
 }
 if (getCookie("dark") === "1") document.body.classList.add("mdui-theme-layout-dark")
 document.getElementById("theme").onclick = () => {

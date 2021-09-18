@@ -1,0 +1,16 @@
+{
+  "name": "blackcat-app",
+  "version": "1.0.0",
+  "description": "Black cat bot web app",
+  "main": "N/A",
+  "repository": "https://github.com/wolf-yuan-6115/blackcat-app.git",
+  "author": "wolf-yuan-6115",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "stylus": "^0.55.0"
+  },
+  "scripts": {
+    "build": "bash build.sh"
+  }
+}
