@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <script async src="https://arc.io/widget.min.js#kJumrvnj"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-178450608-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-178450608-1');
+  </script>
+  <meta charset="UTF-8">
+  <title>Black cat | 播放狀態</title>
+  <meta name="og:url" property="og:url" content="https://blackcatbot.tk/app">
+  <meta name="og:title" property="og:title" content="Black cat | 播放狀態">
+  <meta name="og:description" property="og:description" content="在網頁上控制Black cat的音樂">
+  <meta name="og:type" property="og:type" content="website">
+  <meta name="og:image" property="og:image" content="https://blackcatbot.tk/banner.jpg">
+  <meta name="description" content="在網頁上控制Black cat的音樂">
+  <meta name="theme-color" content="#0DCAF0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons+Round">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="canonical" href="https://app.blackcatbot.tk/">
+  <link rel="icon" href="favicon.png">
+</head>
+
+<body class="bg-light">
+  <div class="sticky-top bg-transparent">
+    <nav class="navbar navbar-expand-lg" style="background-color: #5865F2;">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="https://app.blackcatbot.tk">
+          <img src="favicon.png" alt="Black cat logo" width="60px" height="60px" class="d-inline align-top img-thumbnail" style="border-radius: 50%">
+        </a>
+        <div class="d-flex justify-content-end align-items-center rounded-pill float-on-hover" id="user-container">
+          <img src="#" width="45px" height="45px" id="user-avatar" class="rounded-circle" alt="User avatar">
+          <div id="login-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
+              <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+            </svg>
+          </div>
+          &nbsp;&nbsp;
+          <div class="fs-3" id="user-username">登入</div>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="modal fade" id="invalidDialog" tabindex="-1" aria-labelledby="invalidDialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="invalidDialogTitle">ID無效</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          請輸入有效的伺服器ID
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">確定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="errorDialog" tabindex="-1" aria-labelledby="errorDialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="errorDialogTitle">連線到Black cat發生錯誤!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          在連線到Black cat時發生錯誤，請截圖回報給<code>Wolf yuan#1135</code>
+          <br>
+          錯誤內容或代碼:
+          <code id="errorInfo"></code>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="reload">重新載入</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="lyricsDialog" tabindex="-1" aria-labelledby="lyricsDialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="lyricsDialogTitle">歌詞</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h1 class="text-center" id="lyricsLoading">正在取得歌詞...</h1>
+          <div class="progress rounded-pill" id="lyricsProgress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated rounded-pill" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+          </div>
+          <p id="lyricsText"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">關閉</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="loginDialog" tabindex="-1" aria-labelledby="loginDialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="loginDialogTitle">登入?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          你要登入嗎?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary" id="login">
+            <svg width="20px" height="20px" viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0)">
+                <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="#ffffff" />
+              </g>
+              <defs>
+                <clipPath id="clip0">
+                  <rect width="71" height="55" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+            使用Discord登入
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="logoutDialog" tabindex="-1" aria-labelledby="logoutDialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="logoutDialogTitle">登出?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          你要登出嗎?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary" id="logout">登出</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="volumeDialog" tabindex="-1" aria-labelledby="volumeDialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="volumeDialogTitle">變更目前音量</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="fs-2 text-center" id="volumeText"></p>
+          <br>
+          <input type="range" class="form-range" min="0" max="100" id="volumeRange">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="setVolume">設定音量至</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div aria-live="polite" aria-atomic="true" class="bg-dark position-relative bd-example-toasts">
+    <div class="toast-container position-absolute p-3 start-50 translate-middle-x">
+      <div class="toast bg-primary" id="toast">
+        <div class="toast-body text-center ">
+          <h6 id="toastInfo"></h6>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="out" id="out" style="opacity: 0;">
+    <div class="container" id="container">
+      <h3 class="text-center " id="srv">Black cat</h3>
+      <br>
+      <img src="./banner.jpg" class="rounded" id="thumbnail" width="240px" height="140px">
+      <center>
+        <div class="loader" id="loader"></div>
+      </center>
+      <a href="#" id="link" class="link">
+        <p class="fs-4 text-black" id="songtitle">正在取得歌曲資訊...</p>
+      </a>
+      <center>
+        <input type="text" class="form-control rounded" id="serverid" placeholder="伺服器ID" style="text-align:center;" aria-describedby="serverid">
+      </center>
+      <br>
+      <button type="button" id="query" class="btn btn-primary">查詢!</button>
+      <p id="timeT" class="fs-9 text-black"></p>
+      <div class="progress bg-white rounded-pill" id="time">
+        <div class="progress-bar bg-info" id="timeP" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="fixed-bottom w-100 text-center" id="controlPanel">
+    <div class="row justify-content-md-center">
+      <div class="col col-md-2">
+        <button class="btn" id="lyricsButton">
+          <span class="material-icons-round text-white">
+            description
+          </span>
+        </button>
+      </div>
+      <div class="col col-md-2">
+        <button class="btn" id="controlPlay">
+          <span class="material-icons-round text-light">
+            play_arrow
+          </span>
+        </button>
+        <button class="btn" id="controlPause">
+          <span class="material-icons-round text-light">
+            pause
+          </span>
+        </button>
+      </div>
+      <div class="col col-md-2">
+        <button class="btn" id="controlSkip">
+          <span class="material-icons-round text-light">
+            skip_next
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
