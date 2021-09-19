@@ -15,7 +15,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdui/1.0.2/css/mdui.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.1/css/bootstrap-grid.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap">
   <link rel="stylesheet" href="styles.css">
   <link rel="canonical" href="https://app.blackcatbot.tk/">
@@ -32,7 +31,7 @@
   </script>
 </head>
 
-<body class="mdui-theme-primary-blue mdui-theme-accent-indigo mdui-drawer-body-left mdui-appbar-with-toolbar">
+<body class="mdui-theme-primary-blue mdui-theme-accent-indigo mdui-drawer-body-left mdui-appbar-with-toolbar h-100">
   <header class="mdui-appbar mdui-appbar-fixed">
     <div class="mdui-toolbar mdui-color-blue-600">
       <a class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#drawer'}"><i class="mdui-icon material-icons">menu</i></a>
@@ -50,8 +49,9 @@
         <div class="mdui-list-item-content">變更主題</div>
       </div>
       <div class="mdui-divider"></div>
-      <div class="mdui-list-item">
-        <button class="mdui-btn mdui-color-theme-accent mdui-ripple" id="drawerQuery">查詢其他伺服器</button>
+      <div class="mdui-list-item mdui-ripple" id="drawerQuery" mdui-drawer-close>
+        <i class="mdui-list-item-icon mdui-icon material-icons">&#xe8b6;</i>
+        <div class="mdui-list-item-content">查詢其他伺服器</div>
       </div>
     </div>
   </div>
@@ -71,20 +71,20 @@
       <button class="mdui-btn mdui-color-theme-accent mdui-ripple" id="guildSubmit">查詢播放進度</button>
     </div>
   </div>
-  <div class="container">
-    <div class="row">
-      
+  <div class="mdui-container">
+    <div class="mdui-row-xs-1 mdui-valign h-75">
+      jejeje
     </div>
-    <div class="row justify-content-center">
-        <div class="col-1">
-          1
-        </div>
-        <div class="col-1">
-          2
-        </div>
-        <div class="col-1">
-          3
-        </div>
+    <div class="mdui-row-xs-3 mdui-text-center">
+      <div class="mdui-col">
+        1
+      </div>
+      <div class="mdui-col">
+        2
+      </div>
+      <div class="mdui-col">
+        3
+      </div>
     </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mdui/1.0.2/js/mdui.min.js"></script>

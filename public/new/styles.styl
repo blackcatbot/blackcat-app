@@ -1,16 +1,47 @@
-random(a,b)
+/*!
+ * Wolf yuan customized css utilities
+ */
+
+random(a, b)
   return math(math(0, 'random')*(b - a + 1) + a, 'floor')
 
-@keyframes shake
-  for i in 0..10
-    {10% * i}
-      transform: translate(random(-2, 3), random(-2, 3)) rotate(random(-1, 1)deg)
+rounded()
+  -webkit-border-radius: arguments
+  -moz-border-radius: arguments
+  border-radius: arguments
+
+blur-bg(depth, level = 1)
+  backdrop-filter: blur(depth) opacity(level)
+
+fullscreen()
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  width: 100%
+  height: 100%
+
+@font-face
+  font-family: huninn
+  font-style: normal
+  src url(../font/huninn.ttf)
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
 
 body
-  font-family: 'Noto Sans TC', sans-serif
-
-body header
-  font-family: Roboto, 'Noto Sans TC', sans-serif
+  font-family: huninn, sans-serif
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button
@@ -23,31 +54,21 @@ input[type=number]
 .overlay
   position: fixed
   display: none
-  width: 100%
-  height: 100%
-  top: 0
-  left: 0
-  right: 0
-  bottom: 0
-  backdrop-filter: blur(8px) opacity(0)
   z-index: 10000
   transition: backdrop-filter 0.8s
+  fullscreen()
+  blur-bg(8px, 0)
 
 .overlay.open
-  backdrop-filter: blur(8px) opacity(1)
+  blur-bg(8px)
 
 .overlay > div
   display: flex
-  width: 100%
-  height: 100%
-  top: 0
-  left: 0
-  right: 0
-  bottom: 0
   align-items: center
   justify-content: center
   flex-wrap: nowrap
   flex-direction: column
+  fullscreen()
 
 .overlay > div.hide
   opacity: 0
@@ -57,7 +78,69 @@ input[type=number]
   animation-iteration-count: infinite
 
 .img-container
-  box-shadow: 1px 1.4px 4.1px -1px rgba(0, 0, 0, 0.09),
-  2.8px 3.9px 11.4px -1px rgba(0, 0, 0, 0.059),
-  6.6px 9.3px 27.4px -1px rgba(0, 0, 0, 0.045),
-  22px 31px 91px -1px rgba(0, 0, 0, 0.031)
+  box-shadow: 1.5px 1.2px 13.8px rgba(0, 0, 0, 0.006),
+  3.6px 2.9px 33.3px rgba(0, 0, 0, 0.008),
+  6.8px 5.4px 62.6px rgba(0, 0, 0, 0.01),
+  12.1px 9.6px 111.7px rgba(0, 0, 0, 0.012),
+  22.6px 18px 208.9px rgba(0, 0, 0, 0.014),
+  54px 43px 500px rgba(0, 0, 0, 0.02)
+
+percentage = {
+  "0": 0%
+  "25": 25%
+  "50": 50%
+  "75": 75%
+  "100": 100%
+}
+colors = {
+  blue: #0d6efd
+  indigo: #6610f2
+  purple: #6f42c1
+  pink: #d63384
+  red: #dc3545
+  orange: #fd7e14
+  yellow: #ffc107
+  green: #198754
+  teal: #20c997
+  cyan: #0dcaf0
+  gray: #6c757d
+  primary: #0d6efd
+  secondary: #6c757d
+  success: #198754
+  warning: #ffc107
+  info: #0dcaf0
+  danger: #dc3545
+  light: #f8f9fa
+  dark: #212529
+  black: #fff
+  white: #000
+}
+
+for name, percent in percentage
+  .h-{name}
+    height: percent !important
+    min-height: percent !important
+  .w-{name}
+    width: percent !important
+
+for color, hex in colors
+  .bg-{color}
+    background-color: hex
+  .text-{color}
+    color: hex
+  .link-{color}
+    color: hex
+  .link-{color}:focus, .link-{color}:hover
+    color: darken(hex, 15%)
+  .btn-{color}
+    background-color: hex
+    if light(hex)
+      color: colors["black"]
+    else
+      color: colors["white"]
+  .btn-{color}:focus, .btn-{color}:hover
+    background-color: darken(hex, 15%)
+    if light(darken(hex, 15%))
+      color: colors["black"]
+    else
+      color: colors["white"]
