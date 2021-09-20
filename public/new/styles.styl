@@ -2,6 +2,44 @@
  * Wolf yuan customized css utilities
  */
 
+percentage = {
+  "0": 0%
+  "25": 25%
+  "50": 50%
+  "75": 75%
+  "100": 100%
+}
+values = {
+  "0": 0
+  "25": 25
+  "50": 50
+  "75": 75
+  "100": 100
+}
+colors = {
+  blue: #0d6efd
+  indigo: #6610f2
+  purple: #6f42c1
+  pink: #d63384
+  red: #dc3545
+  orange: #fd7e14
+  yellow: #ffc107
+  green: #198754
+  teal: #20c997
+  cyan: #0dcaf0
+  gray: #6c757d
+  primary: #0d6efd
+  secondary: #6c757d
+  success: #198754
+  warning: #ffc107
+  info: #0dcaf0
+  danger: #dc3545
+  light: #f8f9fa
+  dark: #212529
+  black: #fff
+  white: #000
+}
+
 random(a, b)
   return math(math(0, 'random')*(b - a + 1) + a, 'floor')
 
@@ -85,41 +123,20 @@ input[type=number]
   22.6px 18px 208.9px rgba(0, 0, 0, 0.014),
   54px 43px 500px rgba(0, 0, 0, 0.02)
 
-percentage = {
-  "0": 0%
-  "25": 25%
-  "50": 50%
-  "75": 75%
-  "100": 100%
-}
-colors = {
-  blue: #0d6efd
-  indigo: #6610f2
-  purple: #6f42c1
-  pink: #d63384
-  red: #dc3545
-  orange: #fd7e14
-  yellow: #ffc107
-  green: #198754
-  teal: #20c997
-  cyan: #0dcaf0
-  gray: #6c757d
-  primary: #0d6efd
-  secondary: #6c757d
-  success: #198754
-  warning: #ffc107
-  info: #0dcaf0
-  danger: #dc3545
-  light: #f8f9fa
-  dark: #212529
-  black: #fff
-  white: #000
-}
+.vw-100
+  width: 100vw
+
+.vh-100
+  height: 100vh
+
+.center-everything
+  display: flex
+  align-items: center
+  justify-content: center
 
 for name, percent in percentage
   .h-{name}
     height: percent !important
-    min-height: percent !important
   .w-{name}
     width: percent !important
 
