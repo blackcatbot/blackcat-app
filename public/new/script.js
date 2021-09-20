@@ -77,19 +77,51 @@ let connect = () => {
       document.getElementById("connect").style.display = "none";
       document.getElementById("connectContainer").classList.remove("hide");
     }, 800);
-    try {
-      socket.send(JSON.stringify({
-        server: schema.get("guild")
-      }));
-    } catch (e) {
-      console.error(e);
+    interval = setInterval(() => {
+      try {
+        socket.send(JSON.stringify({
+          server: schema.get("guild")
+        }));
+      } catch (e) {
+        console.error(e);
+      }
+    }, 1000);
+  }
+  let wsMessage = (event) => {
+    let data = JSON.parse(event.data);
+    if (data.playing) {
+      if (document.getElementById("songProgress").classList.has("mdui-progress-indeterminate")) {
+        document.getElementById("songProgress").classList.remove("mdui-progress-indeterminate");
+        document.getElementById("songProgress").classList.add("mdui-progress-determinate");
+      }
+      if (data.total <= 0 || data.total === null) {
+        let sec = Math.floor(json.now % 60);
+        let min = Math.floor((json.now - sec) / 60);
+        $("timeT").innerHTML = `${min < 10 ? "0" + min : min}:${sec < 10 ? "0" + sec : sec}`;
+        $("timeP").style.width = "100%";
+      } else {
+        let nowSec = Math.floor(json.now % 60);
+        let nowMin = Math.floor((json.now - nowSec) / 60);
+        let totalSec = Math.floor(json.total % 60);
+        let totalMin = Math.floor((json.total - totalSec) / 60);
+        $("timeT").innerHTML = `${nowMin < 10 ? "0" + nowMin : nowMin}:${nowSec < 10 ? "0" + nowSec : nowSec}/${totalMin < 10 ? "0" + totalMin : totalMin}:${totalSec < 10 ? "0" + totalSec : totalSec}`;
+        $("timeP").style.width = `${(json.now / json.total) * 100}%`;
+      }
+    } else {
+      if (document.getElementById("songProgress").classList.has("mdui-progress-determinate")) {
+        document.getElementById("songProgress").classList.remove("mdui-progress-determinate");
+        document.getElementById("songProgress").classList.add("mdui-progress-indeterminate");
+        document.getElementById("songProgress").style.width = "";
+      }
     }
   }
-  let wsMessage = () => {
-    
+  let wsClose = () => {
+    console.log("WebSocket Disconnected");
   }
   socket = new WebSocket("wss://api.blackcatbot.tk/api/ws/playing");
   socket.addEventListener("open", wsOpen);
+  socket.addEventListener("message", wsMessage);
+  socket.addEventListener("close", wsClose);
 }
 if (getCookie("dark") === "1") document.body.classList.add("mdui-theme-layout-dark")
 document.getElementById("theme").onclick = () => {

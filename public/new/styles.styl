@@ -41,7 +41,7 @@ colors = {
 }
 
 random(a, b)
-  return math(math(0, 'random')*(b - a + 1) + a, 'floor')
+  return math(math(0, 'random') * (b - a + 1) + a, 'floor')
 
 rounded()
   -webkit-border-radius: arguments
@@ -65,21 +65,44 @@ fullscreen()
   src url(../font/huninn.ttf)
 
 @keyframes shake {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  10% { transform: translate(-1px, -2px) rotate(-1deg); }
-  20% { transform: translate(-3px, 0px) rotate(1deg); }
-  30% { transform: translate(3px, 2px) rotate(0deg); }
-  40% { transform: translate(1px, -1px) rotate(1deg); }
-  50% { transform: translate(-1px, 2px) rotate(-1deg); }
-  60% { transform: translate(-3px, 1px) rotate(0deg); }
-  70% { transform: translate(3px, 1px) rotate(-1deg); }
-  80% { transform: translate(-1px, -1px) rotate(1deg); }
-  90% { transform: translate(1px, 2px) rotate(0deg); }
-  100% { transform: translate(1px, -2px) rotate(-1deg); }
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
 }
 
 body
   font-family: huninn, sans-serif
+  overflow-y: hidden
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button
@@ -88,6 +111,9 @@ input::-webkit-inner-spin-button
 
 input[type=number]
   -moz-appearance: textfield
+
+.flex-shrink
+  flex-shrink: 0 !important
 
 .overlay
   position: fixed
@@ -117,11 +143,11 @@ input[type=number]
 
 .img-container
   box-shadow: 1.5px 1.2px 13.8px rgba(0, 0, 0, 0.006),
-  3.6px 2.9px 33.3px rgba(0, 0, 0, 0.008),
-  6.8px 5.4px 62.6px rgba(0, 0, 0, 0.01),
-  12.1px 9.6px 111.7px rgba(0, 0, 0, 0.012),
-  22.6px 18px 208.9px rgba(0, 0, 0, 0.014),
-  54px 43px 500px rgba(0, 0, 0, 0.02)
+          3.6px 2.9px 33.3px rgba(0, 0, 0, 0.008),
+          6.8px 5.4px 62.6px rgba(0, 0, 0, 0.01),
+          12.1px 9.6px 111.7px rgba(0, 0, 0, 0.012),
+          22.6px 18px 208.9px rgba(0, 0, 0, 0.014),
+          54px 43px 500px rgba(0, 0, 0, 0.02)
 
 .vw-100
   width: 100vw
@@ -133,6 +159,10 @@ input[type=number]
   display: flex
   align-items: center
   justify-content: center
+
+.svg
+  display: block
+  margin: auto
 
 for name, percent in percentage
   .h-{name}
