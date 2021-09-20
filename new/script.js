@@ -1,4 +1,6 @@
 let schema = new URLSearchParams(window.location.search), socket, interval;
+let playIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"/></svg>'
+let pauseIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M8 19c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2s-2 .9-2 2v10c0 1.1.9 2 2 2zm6-12v10c0 1.1.9 2 2 2s2-.9 2-2V7c0-1.1-.9-2-2-2s-2 .9-2 2z"/></svg>'
 let request = (url) => {
   return new Promise((resolve, reject) => {
     fetch(url, {
@@ -29,6 +31,13 @@ let delCookie = (cname) => {
 }
 let setCookie = (cname, value) => {
   document.cookie = `${encodeURIComponent(cname)}=${encodeURIComponent(value)}; path=/;`
+}
+let shake = (name, focus) => {
+  document.getElementById(name).classList.add("shake");
+  document.getElementById(focus ?? name).focus();
+  setTimeout(() => {
+    document.getElementById(name).classList.remove("shake");
+  }, 500);
 }
 let queryGuild = () => {
   document.getElementById("guildInput").value = "";
@@ -92,11 +101,11 @@ document.getElementById("drawerQuery").onclick = () => {
   queryGuild();
 }
 document.getElementById("guildSubmit").onclick = () => {
-  if (!document.getElementById("guildInput").value) {
-    document.getElementById("guildForm").classList.add("shake")
-    setTimeout(() => {
-      document.getElementById("guildForm").classList.remove("shake")
-    }, 500);
+  let guildId = document.getElementById("guildInput").value;
+  if (!guildId) {
+    shake("guildForm", "guildInput");
+  } else if (isNaN(guildId) || guildId.length < 17 || guildId.length > 18) {
+    shake("guildForm", "guildInput");
   } else {
     schema.set("guild", document.getElementById("guildInput").value);
     let refresh = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${schema}`;
