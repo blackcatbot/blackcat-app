@@ -4,6 +4,12 @@ if (urlParams.has("code")) {
   fetch(`https://api.blackcatbot.tk/api/auth/login?code=${urlParams.get("code")}`)
     .then(res => res.json())
     .then(json => {
+      let origin;
+      if (urlParams.has("state")) {
+        origin = urlParams.get("state");
+      } else {
+        origin = "https://app.blackcatbot.tk"
+      }
       window.opener.postMessage({
         token: json.token,
         isFromBlackcat: true
