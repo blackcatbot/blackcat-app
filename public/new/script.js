@@ -120,6 +120,10 @@ let connect = () => {
         document.getElementById("songProgress").classList.add("mdui-progress-indeterminate");
         document.getElementById("songProgress").style.width = "";
       }
+      document.getElementById("songTime").innerHTML = "--:--";
+      document.getElementById("songTitle").innerText = "沒有音樂正在播放";
+      document.getElementById("songServer").innerText = "於伺服器內新增更多音樂吧";
+      document.getElementById("songImage").src = "../unknown.png";
     }
   }
   let wsClose = () => {
