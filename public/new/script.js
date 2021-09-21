@@ -1,4 +1,4 @@
-let schema = new URLSearchParams(window.location.search), socket, interval;
+let schema = new URLSearchParams(window.location.search), socket, interval, image;
 let playIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"/></svg>'
 let pauseIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M8 19c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2s-2 .9-2 2v10c0 1.1.9 2 2 2zm6-12v10c0 1.1.9 2 2 2s2-.9 2-2V7c0-1.1-.9-2-2-2s-2 .9-2 2z"/></svg>'
 let request = (url) => {
@@ -113,7 +113,22 @@ let connect = () => {
       }
       document.getElementById("songTitle").innerText = data.title;
       document.getElementById("songServer").innerText = `於${data.name}內播放中`
-      document.getElementById("songImage").src = data.thumbnail;
+      if (img !== data.thumbnail) {
+        document.getElementById("songImage").src = data.thumbnail;
+        img = data.thumbnail;
+      }
+    } else if (!data.exist) {
+      clearInterval(interval);
+      interval = undefined;
+      if (document.getElementById("songProgress").classList.contains("mdui-progress-determinate")) {
+        document.getElementById("songProgress").classList.remove("mdui-progress-determinate");
+        document.getElementById("songProgress").classList.add("mdui-progress-indeterminate");
+        document.getElementById("songProgress").style.width = "";
+      }
+      document.getElementById("songTime").innerHTML = "--:--";
+      document.getElementById("songTitle").innerText = "伺服器不存在";
+      document.getElementById("songServer").innerText = "邀請黑貓至您的伺服器來享受高品質的音樂";
+      document.getElementById("songImage").src = "../unknown.png";
     } else {
       if (document.getElementById("songProgress").classList.contains("mdui-progress-determinate")) {
         document.getElementById("songProgress").classList.remove("mdui-progress-determinate");
