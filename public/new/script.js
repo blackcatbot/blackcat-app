@@ -90,25 +90,32 @@ let connect = () => {
   let wsMessage = (event) => {
     let data = JSON.parse(event.data);
     if (data.playing) {
-      if (document.getElementById("songProgress").classList.has("mdui-progress-indeterminate")) {
-        document.getElementById("songProgress").classList.remove("mdui-progress-indeterminate");
-        document.getElementById("songProgress").classList.add("mdui-progress-determinate");
-      }
       if (data.total <= 0 || data.total === null) {
-        let sec = Math.floor(json.now % 60);
-        let min = Math.floor((json.now - sec) / 60);
-        $("timeT").innerHTML = `${min < 10 ? "0" + min : min}:${sec < 10 ? "0" + sec : sec}`;
-        $("timeP").style.width = "100%";
+        let sec = Math.floor(data.now % 60);
+        let min = Math.floor((data.now - sec) / 60);
+        document.getElementById("songTime").innerHTML = `${min < 10 ? "0" + min : min}:${sec < 10 ? "0" + sec : sec}`;
+        if (document.getElementById("songProgress").classList.contains("mdui-progress-determinate")) {
+          document.getElementById("songProgress").classList.remove("mdui-progress-determinate");
+          document.getElementById("songProgress").classList.add("mdui-progress-indeterminate");
+          document.getElementById("songProgress").style.width = "";
+        }
       } else {
-        let nowSec = Math.floor(json.now % 60);
-        let nowMin = Math.floor((json.now - nowSec) / 60);
-        let totalSec = Math.floor(json.total % 60);
-        let totalMin = Math.floor((json.total - totalSec) / 60);
-        $("timeT").innerHTML = `${nowMin < 10 ? "0" + nowMin : nowMin}:${nowSec < 10 ? "0" + nowSec : nowSec}/${totalMin < 10 ? "0" + totalMin : totalMin}:${totalSec < 10 ? "0" + totalSec : totalSec}`;
-        $("timeP").style.width = `${(json.now / json.total) * 100}%`;
+        let nowSec = Math.floor(data.now % 60);
+        let nowMin = Math.floor((data.now - nowSec) / 60);
+        let totalSec = Math.floor(data.total % 60);
+        let totalMin = Math.floor((data.total - totalSec) / 60);
+        document.getElementById("songTime").innerHTML = `${nowMin < 10 ? "0" + nowMin : nowMin}:${nowSec < 10 ? "0" + nowSec : nowSec}/${totalMin < 10 ? "0" + totalMin : totalMin}:${totalSec < 10 ? "0" + totalSec : totalSec}`;
+        if (document.getElementById("songProgress").classList.contains("mdui-progress-indeterminate")) {
+          document.getElementById("songProgress").classList.remove("mdui-progress-indeterminate");
+          document.getElementById("songProgress").classList.add("mdui-progress-determinate");
+          document.getElementById("songProgress").style.width = `${(data.now / data.total) * 100}%`;
+        }
       }
+      document.getElementById("songTitle").innerText = data.title;
+      document.getElementById("songServer").innerText = `於${data.name}內播放中`
+      document.getElementById("songImage").src = data.thumbnail;
     } else {
-      if (document.getElementById("songProgress").classList.has("mdui-progress-determinate")) {
+      if (document.getElementById("songProgress").classList.contains("mdui-progress-determinate")) {
         document.getElementById("songProgress").classList.remove("mdui-progress-determinate");
         document.getElementById("songProgress").classList.add("mdui-progress-indeterminate");
         document.getElementById("songProgress").style.width = "";
