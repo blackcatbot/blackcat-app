@@ -69,14 +69,14 @@ let connect = () => {
   setTimeout(() => {
     document.getElementById("connect").classList.add("open");
     document.getElementById("connectContainer").classList.remove("hide");
-  });
+  }, 100);
   let wsOpen = () => {
     document.getElementById("connectContainer").classList.add("hide");
     document.getElementById("connect").classList.remove("open");
     setTimeout(() => {
       document.getElementById("connect").style.display = "none";
       document.getElementById("connectContainer").classList.remove("hide");
-    }, 800);
+    }, 100);
     interval = setInterval(() => {
       try {
         socket.send(JSON.stringify({
@@ -113,9 +113,9 @@ let connect = () => {
       }
       document.getElementById("songTitle").innerText = data.title;
       document.getElementById("songServer").innerText = `於${data.name}內播放中`
-      if (img !== data.thumbnail) {
+      if (image !== data.thumbnail) {
         document.getElementById("songImage").src = data.thumbnail;
-        img = data.thumbnail;
+        image = data.thumbnail;
       }
     } else if (!data.exist) {
       clearInterval(interval);
@@ -181,9 +181,48 @@ document.getElementById("guildSubmit").onclick = () => {
     }, 800);
   }
 }
+document.getElementById("drawerLogin").onclick = () => {
+  document.getElementById("loginContainer").classList.add("hide");
+  document.getElementById("login").style.display = "block";
+  setTimeout(() => {
+    document.getElementById("login").classList.add("open");
+    document.getElementById("loginContainer").classList.remove("hide");
+  });
+  const windowArea = {
+    width: Math.floor(window.outerWidth * 0.8),
+    height: Math.floor(window.outerHeight * 0.5),
+  };
+  if (windowArea.width < 1000) { windowArea.width = 1000; }
+  if (windowArea.height < 630) { windowArea.height = 630; }
+  windowArea.left = Math.floor(window.screenX + ((window.outerWidth - windowArea.width) / 2));
+  windowArea.top = Math.floor(window.screenY + ((window.outerHeight - windowArea.height) / 8));
+  const windowOpts = `toolbar=0,scrollbars=1,status=0,resizable=1,location=0,menuBar=0,
+    width=${windowArea.width},height=${windowArea.height},
+    left=${windowArea.left},top=${windowArea.top}`;
+  let openWindow = window.open("https://discord.com/api/oauth2/authorize?client_id=848006097197334568&redirect_uri=https%3A%2F%2Fapp.blackcatbot.tk%2Fcallback%2F&response_type=code&scope=identify%20guilds", "login", windowOpts);
+
+  window.addEventListener("message", event => {
+    if (!event.data.isFromBlackcat) return;
+    document.cookie = `token=${event.data.token};max-age:${60 * 60 * 12};`
+    openWindow.close();
+  });
+  openWindow.addEventListener("close", () => {
+    document.getElementById("loginContainer").classList.add("hide");
+    document.getElementById("login").classList.remove("open");
+    setTimeout(() => {
+      document.getElementById("login").style.display = "none";
+      document.getElementById("loginContainer").classList.remove("hide");
+    }, 100);
+  });
+}
 
 if (!schema.has("guild")) {
   queryGuild();
 } else {
   connect();
+}
+if (getCookie("token")) {
+  document.getElementById("drawerLoginText").innerHTML = "登出";
+} else {
+  document.getElementById("drawerLoginText").innerHTML = "登入";
 }
